@@ -1,0 +1,14 @@
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex4-Generic Predicate Filter/bin/Debug/net10.0/Ex4-Generic Predicate Filter
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex4-Generic Predicate Filter/bin/Debug/net10.0/Ex4-Generic Predicate Filter.deps.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex4-Generic Predicate Filter/bin/Debug/net10.0/Ex4-Generic Predicate Filter.runtimeconfig.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex4-Generic Predicate Filter/bin/Debug/net10.0/Ex4-Generic Predicate Filter.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex4-Generic Predicate Filter/bin/Debug/net10.0/Ex4-Generic Predicate Filter.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex4-Generic Predicate Filter/obj/Debug/net10.0/Ex4-Generic Predicate Filter.GeneratedMSBuildEditorConfig.editorconfig
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex4-Generic Predicate Filter/obj/Debug/net10.0/Ex4-Generic Predicate Filter.AssemblyInfoInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex4-Generic Predicate Filter/obj/Debug/net10.0/Ex4-Generic Predicate Filter.AssemblyInfo.cs
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex4-Generic Predicate Filter/obj/Debug/net10.0/Ex4-Generic Predicate Filter.csproj.CoreCompileInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex4-Generic Predicate Filter/obj/Debug/net10.0/Ex4-Generic Predicate Filter.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex4-Generic Predicate Filter/obj/Debug/net10.0/refint/Ex4-Generic Predicate Filter.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex4-Generic Predicate Filter/obj/Debug/net10.0/Ex4-Generic Predicate Filter.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex4-Generic Predicate Filter/obj/Debug/net10.0/Ex4-Generic Predicate Filter.genruntimeconfig.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex4-Generic Predicate Filter/obj/Debug/net10.0/ref/Ex4-Generic Predicate Filter.dll

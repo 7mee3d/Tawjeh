@@ -1,0 +1,14 @@
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Stack/CommandHistoryManager/obj/Debug/net10.0/CommandHistoryManager.GeneratedMSBuildEditorConfig.editorconfig
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Stack/CommandHistoryManager/obj/Debug/net10.0/CommandHistoryManager.AssemblyInfoInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Stack/CommandHistoryManager/obj/Debug/net10.0/CommandHistoryManager.AssemblyInfo.cs
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Stack/CommandHistoryManager/obj/Debug/net10.0/CommandHistoryManager.csproj.CoreCompileInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Stack/CommandHistoryManager/bin/Debug/net10.0/CommandHistoryManager
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Stack/CommandHistoryManager/bin/Debug/net10.0/CommandHistoryManager.deps.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Stack/CommandHistoryManager/bin/Debug/net10.0/CommandHistoryManager.runtimeconfig.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Stack/CommandHistoryManager/bin/Debug/net10.0/CommandHistoryManager.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Stack/CommandHistoryManager/bin/Debug/net10.0/CommandHistoryManager.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Stack/CommandHistoryManager/obj/Debug/net10.0/CommandHistoryManager.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Stack/CommandHistoryManager/obj/Debug/net10.0/refint/CommandHistoryManager.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Stack/CommandHistoryManager/obj/Debug/net10.0/CommandHistoryManager.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Stack/CommandHistoryManager/obj/Debug/net10.0/CommandHistoryManager.genruntimeconfig.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Stack/CommandHistoryManager/obj/Debug/net10.0/ref/CommandHistoryManager.dll

@@ -1,0 +1,14 @@
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Hash Set/ExpHashSet/bin/Debug/net10.0/ExpHashSet
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Hash Set/ExpHashSet/bin/Debug/net10.0/ExpHashSet.deps.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Hash Set/ExpHashSet/bin/Debug/net10.0/ExpHashSet.runtimeconfig.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Hash Set/ExpHashSet/bin/Debug/net10.0/ExpHashSet.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Hash Set/ExpHashSet/bin/Debug/net10.0/ExpHashSet.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Hash Set/ExpHashSet/obj/Debug/net10.0/ExpHashSet.GeneratedMSBuildEditorConfig.editorconfig
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Hash Set/ExpHashSet/obj/Debug/net10.0/ExpHashSet.AssemblyInfoInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Hash Set/ExpHashSet/obj/Debug/net10.0/ExpHashSet.AssemblyInfo.cs
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Hash Set/ExpHashSet/obj/Debug/net10.0/ExpHashSet.csproj.CoreCompileInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Hash Set/ExpHashSet/obj/Debug/net10.0/ExpHashSet.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Hash Set/ExpHashSet/obj/Debug/net10.0/refint/ExpHashSet.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Hash Set/ExpHashSet/obj/Debug/net10.0/ExpHashSet.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Hash Set/ExpHashSet/obj/Debug/net10.0/ExpHashSet.genruntimeconfig.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Hash Set/ExpHashSet/obj/Debug/net10.0/ref/ExpHashSet.dll

@@ -1,0 +1,14 @@
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex5-Generic Max Finder/bin/Debug/net10.0/Ex5-Generic Max Finder
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex5-Generic Max Finder/bin/Debug/net10.0/Ex5-Generic Max Finder.deps.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex5-Generic Max Finder/bin/Debug/net10.0/Ex5-Generic Max Finder.runtimeconfig.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex5-Generic Max Finder/bin/Debug/net10.0/Ex5-Generic Max Finder.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex5-Generic Max Finder/bin/Debug/net10.0/Ex5-Generic Max Finder.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex5-Generic Max Finder/obj/Debug/net10.0/Ex5-Generic Max Finder.GeneratedMSBuildEditorConfig.editorconfig
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex5-Generic Max Finder/obj/Debug/net10.0/Ex5-Generic Max Finder.AssemblyInfoInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex5-Generic Max Finder/obj/Debug/net10.0/Ex5-Generic Max Finder.AssemblyInfo.cs
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex5-Generic Max Finder/obj/Debug/net10.0/Ex5-Generic Max Finder.csproj.CoreCompileInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex5-Generic Max Finder/obj/Debug/net10.0/Ex5-Generic Max Finder.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex5-Generic Max Finder/obj/Debug/net10.0/refint/Ex5-Generic Max Finder.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex5-Generic Max Finder/obj/Debug/net10.0/Ex5-Generic Max Finder.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex5-Generic Max Finder/obj/Debug/net10.0/Ex5-Generic Max Finder.genruntimeconfig.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex5-Generic Max Finder/obj/Debug/net10.0/ref/Ex5-Generic Max Finder.dll

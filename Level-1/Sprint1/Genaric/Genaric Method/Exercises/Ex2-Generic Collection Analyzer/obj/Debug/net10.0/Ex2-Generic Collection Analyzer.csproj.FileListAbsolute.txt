@@ -1,0 +1,14 @@
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex2-Generic Collection Analyzer/bin/Debug/net10.0/Ex2-Generic Collection Analyzer
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex2-Generic Collection Analyzer/bin/Debug/net10.0/Ex2-Generic Collection Analyzer.deps.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex2-Generic Collection Analyzer/bin/Debug/net10.0/Ex2-Generic Collection Analyzer.runtimeconfig.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex2-Generic Collection Analyzer/bin/Debug/net10.0/Ex2-Generic Collection Analyzer.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex2-Generic Collection Analyzer/bin/Debug/net10.0/Ex2-Generic Collection Analyzer.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex2-Generic Collection Analyzer/obj/Debug/net10.0/Ex2-Generic Collection Analyzer.GeneratedMSBuildEditorConfig.editorconfig
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex2-Generic Collection Analyzer/obj/Debug/net10.0/Ex2-Generic Collection Analyzer.AssemblyInfoInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex2-Generic Collection Analyzer/obj/Debug/net10.0/Ex2-Generic Collection Analyzer.AssemblyInfo.cs
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex2-Generic Collection Analyzer/obj/Debug/net10.0/Ex2-Generic Collection Analyzer.csproj.CoreCompileInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex2-Generic Collection Analyzer/obj/Debug/net10.0/Ex2-Generic Collection Analyzer.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex2-Generic Collection Analyzer/obj/Debug/net10.0/refint/Ex2-Generic Collection Analyzer.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex2-Generic Collection Analyzer/obj/Debug/net10.0/Ex2-Generic Collection Analyzer.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex2-Generic Collection Analyzer/obj/Debug/net10.0/Ex2-Generic Collection Analyzer.genruntimeconfig.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex2-Generic Collection Analyzer/obj/Debug/net10.0/ref/Ex2-Generic Collection Analyzer.dll

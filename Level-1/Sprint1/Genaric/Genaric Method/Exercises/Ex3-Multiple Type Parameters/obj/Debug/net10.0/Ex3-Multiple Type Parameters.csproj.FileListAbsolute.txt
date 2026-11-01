@@ -1,0 +1,14 @@
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex3-Multiple Type Parameters/bin/Debug/net10.0/Ex3-Multiple Type Parameters
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex3-Multiple Type Parameters/bin/Debug/net10.0/Ex3-Multiple Type Parameters.deps.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex3-Multiple Type Parameters/bin/Debug/net10.0/Ex3-Multiple Type Parameters.runtimeconfig.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex3-Multiple Type Parameters/bin/Debug/net10.0/Ex3-Multiple Type Parameters.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex3-Multiple Type Parameters/bin/Debug/net10.0/Ex3-Multiple Type Parameters.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex3-Multiple Type Parameters/obj/Debug/net10.0/Ex3-Multiple Type Parameters.GeneratedMSBuildEditorConfig.editorconfig
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex3-Multiple Type Parameters/obj/Debug/net10.0/Ex3-Multiple Type Parameters.AssemblyInfoInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex3-Multiple Type Parameters/obj/Debug/net10.0/Ex3-Multiple Type Parameters.AssemblyInfo.cs
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex3-Multiple Type Parameters/obj/Debug/net10.0/Ex3-Multiple Type Parameters.csproj.CoreCompileInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex3-Multiple Type Parameters/obj/Debug/net10.0/Ex3-Multiple Type Parameters.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex3-Multiple Type Parameters/obj/Debug/net10.0/refint/Ex3-Multiple Type Parameters.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex3-Multiple Type Parameters/obj/Debug/net10.0/Ex3-Multiple Type Parameters.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex3-Multiple Type Parameters/obj/Debug/net10.0/Ex3-Multiple Type Parameters.genruntimeconfig.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex3-Multiple Type Parameters/obj/Debug/net10.0/ref/Ex3-Multiple Type Parameters.dll

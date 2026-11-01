@@ -1,0 +1,14 @@
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Class/P1-Generic Repository System/bin/Debug/net10.0/P1-Generic Repository System
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Class/P1-Generic Repository System/bin/Debug/net10.0/P1-Generic Repository System.deps.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Class/P1-Generic Repository System/bin/Debug/net10.0/P1-Generic Repository System.runtimeconfig.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Class/P1-Generic Repository System/bin/Debug/net10.0/P1-Generic Repository System.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Class/P1-Generic Repository System/bin/Debug/net10.0/P1-Generic Repository System.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Class/P1-Generic Repository System/obj/Debug/net10.0/P1-Generic Repository System.GeneratedMSBuildEditorConfig.editorconfig
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Class/P1-Generic Repository System/obj/Debug/net10.0/P1-Generic Repository System.AssemblyInfoInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Class/P1-Generic Repository System/obj/Debug/net10.0/P1-Generic Repository System.AssemblyInfo.cs
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Class/P1-Generic Repository System/obj/Debug/net10.0/P1-Generic Repository System.csproj.CoreCompileInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Class/P1-Generic Repository System/obj/Debug/net10.0/P1-Generic Repository System.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Class/P1-Generic Repository System/obj/Debug/net10.0/refint/P1-Generic Repository System.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Class/P1-Generic Repository System/obj/Debug/net10.0/P1-Generic Repository System.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Class/P1-Generic Repository System/obj/Debug/net10.0/P1-Generic Repository System.genruntimeconfig.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Class/P1-Generic Repository System/obj/Debug/net10.0/ref/P1-Generic Repository System.dll

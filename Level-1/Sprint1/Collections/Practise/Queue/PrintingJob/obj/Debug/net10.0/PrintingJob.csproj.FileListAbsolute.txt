@@ -1,0 +1,14 @@
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Queue/PrintingJob/bin/Debug/net10.0/PrintingJob
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Queue/PrintingJob/bin/Debug/net10.0/PrintingJob.deps.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Queue/PrintingJob/bin/Debug/net10.0/PrintingJob.runtimeconfig.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Queue/PrintingJob/bin/Debug/net10.0/PrintingJob.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Queue/PrintingJob/bin/Debug/net10.0/PrintingJob.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Queue/PrintingJob/obj/Debug/net10.0/PrintingJob.GeneratedMSBuildEditorConfig.editorconfig
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Queue/PrintingJob/obj/Debug/net10.0/PrintingJob.AssemblyInfoInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Queue/PrintingJob/obj/Debug/net10.0/PrintingJob.AssemblyInfo.cs
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Queue/PrintingJob/obj/Debug/net10.0/PrintingJob.csproj.CoreCompileInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Queue/PrintingJob/obj/Debug/net10.0/PrintingJob.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Queue/PrintingJob/obj/Debug/net10.0/refint/PrintingJob.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Queue/PrintingJob/obj/Debug/net10.0/PrintingJob.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Queue/PrintingJob/obj/Debug/net10.0/PrintingJob.genruntimeconfig.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/Practise/Queue/PrintingJob/obj/Debug/net10.0/ref/PrintingJob.dll

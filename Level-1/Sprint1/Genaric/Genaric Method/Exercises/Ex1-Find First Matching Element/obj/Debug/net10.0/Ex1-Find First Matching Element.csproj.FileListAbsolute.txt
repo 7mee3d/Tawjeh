@@ -1,0 +1,14 @@
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex1-Find First Matching Element/obj/Debug/net10.0/Ex1-Find First Matching Element.GeneratedMSBuildEditorConfig.editorconfig
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex1-Find First Matching Element/obj/Debug/net10.0/Ex1-Find First Matching Element.AssemblyInfoInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex1-Find First Matching Element/obj/Debug/net10.0/Ex1-Find First Matching Element.AssemblyInfo.cs
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex1-Find First Matching Element/obj/Debug/net10.0/Ex1-Find First Matching Element.csproj.CoreCompileInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex1-Find First Matching Element/bin/Debug/net10.0/Ex1-Find First Matching Element
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex1-Find First Matching Element/bin/Debug/net10.0/Ex1-Find First Matching Element.deps.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex1-Find First Matching Element/bin/Debug/net10.0/Ex1-Find First Matching Element.runtimeconfig.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex1-Find First Matching Element/bin/Debug/net10.0/Ex1-Find First Matching Element.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex1-Find First Matching Element/bin/Debug/net10.0/Ex1-Find First Matching Element.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex1-Find First Matching Element/obj/Debug/net10.0/Ex1-Find First Matching Element.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex1-Find First Matching Element/obj/Debug/net10.0/refint/Ex1-Find First Matching Element.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex1-Find First Matching Element/obj/Debug/net10.0/Ex1-Find First Matching Element.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex1-Find First Matching Element/obj/Debug/net10.0/Ex1-Find First Matching Element.genruntimeconfig.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Genaric/Genaric Method/Exercises/Ex1-Find First Matching Element/obj/Debug/net10.0/ref/Ex1-Find First Matching Element.dll

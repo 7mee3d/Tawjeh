@@ -1,0 +1,14 @@
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/List and Dictionaries/CountryManager/bin/Debug/net10.0/CountryManager
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/List and Dictionaries/CountryManager/bin/Debug/net10.0/CountryManager.deps.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/List and Dictionaries/CountryManager/bin/Debug/net10.0/CountryManager.runtimeconfig.json
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/List and Dictionaries/CountryManager/bin/Debug/net10.0/CountryManager.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/List and Dictionaries/CountryManager/bin/Debug/net10.0/CountryManager.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/List and Dictionaries/CountryManager/obj/Debug/net10.0/CountryManager.GeneratedMSBuildEditorConfig.editorconfig
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/List and Dictionaries/CountryManager/obj/Debug/net10.0/CountryManager.AssemblyInfoInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/List and Dictionaries/CountryManager/obj/Debug/net10.0/CountryManager.AssemblyInfo.cs
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/List and Dictionaries/CountryManager/obj/Debug/net10.0/CountryManager.csproj.CoreCompileInputs.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/List and Dictionaries/CountryManager/obj/Debug/net10.0/CountryManager.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/List and Dictionaries/CountryManager/obj/Debug/net10.0/refint/CountryManager.dll
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/List and Dictionaries/CountryManager/obj/Debug/net10.0/CountryManager.pdb
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/List and Dictionaries/CountryManager/obj/Debug/net10.0/CountryManager.genruntimeconfig.cache
+/home/ahmedjehad/Desktop/Tawjeh/Level-1/Collections/List and Dictionaries/CountryManager/obj/Debug/net10.0/ref/CountryManager.dll
