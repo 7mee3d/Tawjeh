@@ -1,6 +1,6 @@
 namespace JobApplicationTracker.Enums;
 
-public enum ApplicationStatus
+public enum ApplicationStatus : byte
 {
     Submitted,
     UnderReview,

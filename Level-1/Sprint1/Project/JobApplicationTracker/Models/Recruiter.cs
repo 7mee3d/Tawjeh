@@ -11,13 +11,12 @@ public class Recruiter
 
         if (companyId <= 0)
             throw new ArgumentOutOfRangeException(nameof(companyId));
-        
+
         ChangeName(name);
         ChangeEmail(email);
-       
-        Id = id;
-        CompanyId = companyId;
+        ChangeCompany(companyId);
 
+        Id = id;
 
     }
 
@@ -43,5 +42,13 @@ public class Recruiter
             throw new ArgumentException("Invalid email format.");
 
         this.Email = email.Trim();
+    }
+
+    public void ChangeCompany(int companyId)
+    {
+        if (companyId <= 0)
+            throw new ArgumentOutOfRangeException(nameof(companyId));
+
+        CompanyId = companyId;
     }
 }

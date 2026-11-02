@@ -2,7 +2,7 @@ namespace JobApplicationTracker.Models;
 
 public class Candidate
 {
-    public Candidate(int id,string fullName,string email,string phone,int yearsOfExperience)
+    public Candidate(int id, string fullName, string email, string phone, int yearsOfExperience)
     {
         if (id <= 0)
             throw new ArgumentOutOfRangeException(nameof(id));
@@ -19,10 +19,11 @@ public class Candidate
 
         ChangeName(fullName);
         ChangeEmail(email);
-
+        ChangePhone(phone);
+        ChangeYearsOfExperience(yearsOfExperience);
+        
         Id = id;
-        Phone = phone;
-        YearsOfExperience = yearsOfExperience;
+
     }
 
     public int Id { get; private set; }
@@ -49,5 +50,18 @@ public class Candidate
             throw new ArgumentException("Invalid email format.", nameof(email));
 
         this.Email = email.Trim();
+    }
+
+    public void ChangePhone(string phone)
+    {
+        Phone = phone?.Trim() ?? string.Empty;
+    }
+
+    public void ChangeYearsOfExperience(int yearsOfExperience)
+    {
+        if (yearsOfExperience < 0)
+            throw new ArgumentOutOfRangeException(nameof(yearsOfExperience));
+
+        YearsOfExperience = yearsOfExperience;
     }
 }

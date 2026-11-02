@@ -78,6 +78,14 @@ public class Job
 
         this.IsOpen = false;
     }
+    public void ChangeCompany(int companyId)
+    {
+        CompanyId = companyId;
+    }
 
+    public void ChangeRecruiter(int recruiterId)
+    {
+        RecruiterId = recruiterId;
+    }
 
 }

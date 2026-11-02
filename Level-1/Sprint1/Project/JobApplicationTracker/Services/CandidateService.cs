@@ -1,3 +1,5 @@
+
+using JobApplicationTracker.Enums;
 using JobApplicationTracker.Models;
 
 namespace JobApplicationTracker.Services;
@@ -30,6 +32,166 @@ public class CandidateService
             Console.WriteLine($"Phone              : {candidate.Phone}");
             Console.WriteLine($"YearsOfExperience  : {candidate.YearsOfExperience}");
             Console.WriteLine(new string('-', 40));
+        }
+    }
+
+    private void _AddCandidate(string fullName, string email, string phone, int yearsOfExperience)
+    {
+        try
+        {
+            int nextId = _candidates.Count == 0
+                ? 1
+                : _candidates[^1].Id + 1;
+
+            var newCandidate = new Candidate(
+                nextId, fullName, email, phone, yearsOfExperience
+            );
+
+            _candidates.Add(newCandidate);
+
+            Console.WriteLine("\nCandidate Added Successfully");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    private void _UpdateCandidate(int id, string fullName, string email, string phone, int yearsOfExperience)
+    {
+        try
+        {
+            foreach (var candidate in _candidates)
+            {
+                if (candidate.Id == id)
+                {
+                    candidate.ChangeName(fullName);
+                    candidate.ChangeEmail(email);
+                    candidate.ChangePhone(phone);
+                    candidate.ChangeYearsOfExperience(yearsOfExperience);
+
+                    Console.WriteLine($"\nCandidate ID {id} Updated Successfully");
+                    return;
+                }
+            }
+
+            Console.WriteLine("Candidate does not exist");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    private void _Remove(int id)
+    {
+        try
+        {
+            int index = _candidates.FindIndex(x => x.Id == id);
+
+            if (index == -1)
+            {
+                Console.WriteLine("Candidate does not exist");
+                return;
+            }
+
+            _candidates.RemoveAt(index);
+
+            Console.WriteLine($"\nCandidate ID {id} Removed Successfully");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    public void StartupCandidateService()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Utility.Utility.PrintSubMenu("Candidate");
+
+            byte choice = 0;
+
+            Console.Write("Choose: ");
+            while (!byte.TryParse(Console.ReadLine(), out choice))
+                Console.Write("Invalid choice, try again: ");
+
+            switch ((MainOperation)choice)
+            {
+                case MainOperation.Add:
+                    {
+                        Console.Write("Enter full name: ");
+                        string fullName = Console.ReadLine()!;
+
+                        Console.Write("Enter email: ");
+                        string email = Console.ReadLine()!;
+
+                        Console.Write("Enter phone: ");
+                        string phone = Console.ReadLine()!;
+
+                        Console.Write("Enter years of experience: ");
+                        int yearsOfExperience;
+
+                        while (!int.TryParse(Console.ReadLine(), out yearsOfExperience))
+                            Console.Write("Invalid value, try again: ");
+
+                        _AddCandidate(fullName, email, phone, yearsOfExperience);
+                        break;
+                    }
+
+                case MainOperation.Update:
+                    {
+                        Console.Write("Enter candidate ID: ");
+                        int id;
+
+                        while (!int.TryParse(Console.ReadLine(), out id))
+                            Console.Write("Invalid candidate ID, try again: ");
+
+                        Console.Write("Enter new full name: ");
+                        string fullName = Console.ReadLine()!;
+
+                        Console.Write("Enter new email: ");
+                        string email = Console.ReadLine()!;
+
+                        Console.Write("Enter new phone: ");
+                        string phone = Console.ReadLine()!;
+
+                        Console.Write("Enter new years of experience: ");
+                        int yearsOfExperience;
+
+                        while (!int.TryParse(Console.ReadLine(), out yearsOfExperience))
+                            Console.Write("Invalid value, try again: ");
+
+                        _UpdateCandidate(id, fullName, email, phone, yearsOfExperience);
+                        break;
+                    }
+
+                case MainOperation.List:
+                    {
+                        PrintCandidates();
+                        break;
+                    }
+
+                case MainOperation.Remove:
+                    {
+                        Console.Write("Enter candidate ID: ");
+                        int id;
+
+                        while (!int.TryParse(Console.ReadLine(), out id))
+                            Console.Write("Invalid candidate ID, try again: ");
+
+                        _Remove(id);
+                        break;
+                    }
+
+                case MainOperation.Back:
+                    return;
+            }
+
+            Console.WriteLine("\nPress any key to return to the menu...");
+            Console.ReadKey();
         }
     }
 }

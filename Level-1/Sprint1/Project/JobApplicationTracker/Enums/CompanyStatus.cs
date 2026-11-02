@@ -1,6 +1,6 @@
 namespace JobApplicationTracker.Enums;
 
-public enum CompanyStatus
+public enum CompanyStatus : byte
 {
     Pending,
     Approved,
