@@ -1,0 +1,509 @@
+\n===== ./Program.cs =====
+﻿using JobApplicationTracker.Services;
+
+//Load Data 
+
+var companyService = new CompanyService();
+var recruiterService = new RecruiterService();
+var jobService = new JobService();
+var candidateService = new CandidateService();
+var applicationService = new ApplicationService();
+
+//Print data every entity
+
+companyService.PrintCompanies();
+recruiterService.PrintRecruiters();
+jobService.PrintJobs();
+candidateService.PrintCandidates();
+applicationService.PrintApplications();\n===== ./Models/Company.cs =====
+using System.ComponentModel.DataAnnotations;
+using JobApplicationTracker.Enums;
+
+namespace JobApplicationTracker.Models;
+
+public class Company
+{
+    public Company(int id, string name, string industry, string city)
+    {
+        if (id <= 0)
+            throw new ArgumentOutOfRangeException(nameof(id));
+
+        this.Id = id ; 
+        SetName(name);
+        SetIndustry(industry);
+        SetCity(city);
+    }
+    
+    public int Id { get; private set; }
+    [Required]
+    public string Name { get; private set; } = string.Empty;
+    public string Industry { get; private set; } = string.Empty;
+    public string City { get; private set; } = string.Empty;
+    public CompanyStatus Status { get; private set; } = CompanyStatus.Pending;
+
+    public void SetName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Comapny name is invalid");
+
+        this.Name = name.Trim();
+    }
+
+    public void SetCity(string city)
+    {
+        if (string.IsNullOrWhiteSpace(city))
+            throw new ArgumentException("City name is invalid");
+
+        this.City = city.Trim();
+    }
+
+    public void ChangeStatusCompany(CompanyStatus status)
+    {
+        if (!Enum.IsDefined(status))
+            throw new InvalidOperationException("Status Company is invalid");
+
+        this.Status = status;
+    }
+
+    public void SetIndustry(string industry)
+    {
+        if (string.IsNullOrWhiteSpace(industry))
+            throw new ArgumentException("Industry is not valid");
+
+        this.Industry = industry.Trim();
+    }
+}\n===== ./Models/Recruiter.cs =====
+using System.Net.Mail;
+
+namespace JobApplicationTracker.Models;
+
+public class Recruiter
+{
+    public Recruiter(int id, string name, string email, int companyId)
+    {
+        if (id <= 0)
+            throw new ArgumentOutOfRangeException(nameof(id));
+
+        if (companyId <= 0)
+            throw new ArgumentOutOfRangeException(nameof(companyId));
+        
+        ChangeName(name);
+        ChangeEmail(email);
+       
+        Id = id;
+        CompanyId = companyId;
+
+
+    }
+
+    public int Id { get; private set; }
+    public string Name { get; private set; } = string.Empty;
+    public string Email { get; private set; } = string.Empty;
+    public int CompanyId { get; private set; }
+
+    public void ChangeName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Name is required.");
+
+        this.Name = name.Trim();
+    }
+
+    public void ChangeEmail(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+            throw new ArgumentException("Email is required.");
+
+        if (!MailAddress.TryCreate(email, out _))
+            throw new ArgumentException("Invalid email format.");
+
+        this.Email = email.Trim();
+    }
+}\n===== ./Models/Job.cs =====
+using System.ComponentModel.DataAnnotations;
+
+namespace JobApplicationTracker.Models;
+
+public class Job
+{
+    public Job(int id, string title, string description, decimal salary, string location, int companyId, int recruiterId)
+    {
+        if (id <= 0)
+            throw new ArgumentOutOfRangeException(nameof(id), id, "Job ID must be greater than zero.");
+        if (companyId <= 0)
+            throw new ArgumentOutOfRangeException(nameof(companyId), companyId, "Company ID must be greater than zero.");
+        if (recruiterId <= 0)
+            throw new ArgumentOutOfRangeException(nameof(recruiterId), recruiterId, "Recruiter ID must be greater than zero.");
+        if (salary <= 0)
+            throw new ArgumentOutOfRangeException(nameof(salary), salary, "Salary must be greater than zero.");
+
+        ChangeDescription(description);
+        ChangeLocation(location);
+        ChangeTitle(title);
+
+        Id = id;
+        Salary = salary;
+        PostedDate = DateTime.Now;
+        CompanyId = companyId;
+        RecruiterId = recruiterId;
+    }
+
+    public int Id { get; private set; }
+    [Required]
+    public string Title { get; private set; } = string.Empty;
+    public string Description { get; private set; } = string.Empty;
+    [Range(typeof(decimal), "0.01", "9999999999999999.99")] public decimal Salary { get; private set; }
+    public string Location { get; private set; } = string.Empty;
+    public bool IsOpen { get; private set; } = true;
+    public DateTime PostedDate { get; private set; }
+    public int CompanyId { get; private set; }
+    public int RecruiterId { get; private set; }
+
+
+    public void ChangeTitle(string title)
+    {
+        if (string.IsNullOrWhiteSpace(title))
+            throw new ArgumentException("Title is reqired");
+
+        this.Title = title.Trim();
+
+    }
+
+    public void ChangeDescription(string description)
+    {
+        if (string.IsNullOrWhiteSpace(description))
+            throw new ArgumentException("Description is reqired");
+
+        this.Description = description.Trim();
+    }
+
+    public void ChangeLocation(string location)
+    {
+        if (string.IsNullOrWhiteSpace(location))
+            throw new ArgumentException("Location is reqired");
+
+        this.Location = location.Trim();
+    }
+
+    public void SetOpen()
+    {
+        if (this.IsOpen)
+            throw new InvalidOperationException("The Job Already opened ");
+
+        this.IsOpen = true;
+    }
+
+    public void SetClose()
+    {
+        if (!this.IsOpen)
+            throw new InvalidOperationException("The Job Already closed ");
+
+        this.IsOpen = false;
+    }
+
+
+}\n===== ./Models/Candidate.cs =====
+namespace JobApplicationTracker.Models;
+
+public class Candidate
+{
+    public Candidate(int id,string fullName,string email,string phone,int yearsOfExperience)
+    {
+        if (id <= 0)
+            throw new ArgumentOutOfRangeException(nameof(id));
+
+        if (string.IsNullOrWhiteSpace(fullName))
+            throw new ArgumentException("Full name is required.", nameof(fullName));
+
+        if (string.IsNullOrWhiteSpace(email))
+            throw new ArgumentException("Email is required.", nameof(email));
+
+        if (yearsOfExperience < 0)
+            throw new ArgumentOutOfRangeException(nameof(yearsOfExperience));
+
+
+        ChangeName(fullName);
+        ChangeEmail(email);
+
+        Id = id;
+        Phone = phone;
+        YearsOfExperience = yearsOfExperience;
+    }
+
+    public int Id { get; private set; }
+    public string FullName { get; private set; } = string.Empty;
+    public string Email { get; private set; } = string.Empty;
+    public string Phone { get; private set; } = string.Empty;
+    public int YearsOfExperience { get; private set; }
+
+    public void ChangeName(string fullName)
+    {
+        if (string.IsNullOrWhiteSpace(fullName))
+            throw new ArgumentException(
+                "Full name is required.", nameof(fullName));
+
+        this.FullName = fullName.Trim();
+    }
+
+    public void ChangeEmail(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+            throw new ArgumentException("Email is required.", nameof(email));
+
+        if (!System.Net.Mail.MailAddress.TryCreate(email, out _))
+            throw new ArgumentException("Invalid email format.", nameof(email));
+
+        this.Email = email.Trim();
+    }
+}\n===== ./Models/Application.cs =====
+using JobApplicationTracker.Enums;
+
+namespace JobApplicationTracker.Models;
+
+public class Application
+{
+    public Application(int id, int jobId, int candidateId)
+    {
+        if (id <= 0)
+            throw new ArgumentOutOfRangeException(nameof(id));
+
+        if (jobId <= 0)
+            throw new ArgumentOutOfRangeException(nameof(jobId));
+
+        if (candidateId <= 0)
+            throw new ArgumentOutOfRangeException(nameof(candidateId));
+
+        Id = id;
+        JobId = jobId;
+        CandidateId = candidateId;
+        AppliedDate = DateTime.Now;
+    }
+
+    public int Id { get; private set; }
+    public int JobId { get; private set; }
+    public int CandidateId { get; private set; }
+    public DateTime AppliedDate { get; private set; }
+    public ApplicationStatus Status { get; private set; } = ApplicationStatus.Submitted;
+
+    public void ChangeStatus(ApplicationStatus status)
+    {
+        if (!Enum.IsDefined(status))
+            throw new ArgumentOutOfRangeException(nameof(status));
+
+        this.Status = status;
+    }
+}\n===== ./Models/BaseEntity.cs =====
+namespace JobApplicationTracker.Models;
+
+public abstract class BaseEntity
+{
+    public int Id { get; private set; }
+    public DateTime CreatedAt { get; private set; }
+
+    public void AssignId(int id)
+    {
+        if (this.Id != 0)
+            throw new ArgumentException("Must assign id");
+
+        if (id <= 0)
+            throw new ArgumentOutOfRangeException(nameof(id));
+
+        this.Id = id;
+        this.CreatedAt = DateTime.Now;
+    }
+}\n===== ./Services/CompanyService.cs =====
+using JobApplicationTracker.Models;
+
+namespace JobApplicationTracker.Services;
+
+public class CompanyService
+{
+    private readonly List<Company> _companies = new();
+
+    public CompanyService()
+    {
+        _AddCompanies();
+    }
+
+    private void _AddCompanies()
+    {
+        _companies.Add(new Company(1, "Microsoft", "Software Development","Redmond" ));
+
+        _companies.Add(new Company(2, "Google", "Technology","Mountain View"));
+
+        _companies.Add(new Company(3, "Amazon", "E-Commerce","Seattle"));
+    }
+
+    public void PrintCompanies()
+    {
+        foreach (var company in _companies)
+        {
+            Console.WriteLine($"ID       : {company.Id}");
+            Console.WriteLine($"Name     : {company.Name}");
+            Console.WriteLine($"Industry : {company.Industry}");
+            Console.WriteLine($"City     : {company.City}");
+            Console.WriteLine($"Status   : {company.Status}");
+            Console.WriteLine(new string('-', 40));
+        }
+    }
+}\n===== ./Services/JobService.cs =====
+namespace JobApplicationTracker.Services;
+
+using JobApplicationTracker.Models;
+public class JobService
+{
+    private List<Job> _jobs = new();
+
+    public JobService()
+    {
+        _AddJobs();
+    }
+
+    private void _AddJobs()
+    {
+        _jobs.Add(new Job(1, "Backend Developer", ".NET and ASP.NET Core development", 2500, "Redmond", 1, 1));
+        _jobs.Add(new Job(2, "Software Engineer", "Build scalable software systems", 3000, "Redmond", 1, 1));
+        _jobs.Add(new Job(3, "Frontend Developer", "React and modern JavaScript development", 2200, "Mountain View", 2, 2));
+        _jobs.Add(new Job(4, "Data Engineer", "Design and maintain data pipelines", 3500, "Mountain View", 2, 2));
+        _jobs.Add(new Job(5, "Cloud Engineer", "AWS infrastructure and cloud solutions", 3200, "Seattle", 3, 3));
+        _jobs.Add(new Job(6, "DevOps Engineer", "CI/CD and infrastructure automation", 3000, "Seattle", 3, 3));
+    }
+
+    public void PrintJobs()
+    {
+        foreach (var job in _jobs)
+        {
+            Console.WriteLine($"ID          : {job.Id}");
+            Console.WriteLine($"Title       : {job.Title}");
+            Console.WriteLine($"Description : {job.Description}");
+            Console.WriteLine($"Salary      : {job.Salary}");
+            Console.WriteLine($"Location    : {job.Location}");
+            Console.WriteLine($"IsOpen      : {job.IsOpen}");
+            Console.WriteLine($"PostedDate  : {job.PostedDate}");
+            Console.WriteLine($"CompanyId   : {job.CompanyId}");
+            Console.WriteLine($"RecruiterId : {job.RecruiterId}");
+            Console.WriteLine(new string('-', 40));
+        }
+    }
+
+}\n===== ./Services/CandidateService.cs =====
+using JobApplicationTracker.Models;
+
+namespace JobApplicationTracker.Services;
+
+public class CandidateService
+{
+    private List<Candidate> _candidates = new();
+
+    public CandidateService()
+    {
+        _AddCandidates();
+    }
+
+    private void _AddCandidates()
+    {
+        _candidates.Add(new Candidate(1, "Ahmed Hassan", "ahmed@gmail.com", "01012345678", 2));
+        _candidates.Add(new Candidate(2, "Omar Ali", "omar@gmail.com", "01023456789", 3));
+        _candidates.Add(new Candidate(3, "Mohamed Adel", "mohamed@gmail.com", "01034567890", 1));
+        _candidates.Add(new Candidate(4, "Sara Mohamed", "sara@gmail.com", "01045678901", 4));
+        _candidates.Add(new Candidate(5, "Youssef Khaled", "youssef@gmail.com", "01056789012", 0));
+    }
+
+    public void PrintCandidates()
+    {
+        foreach (var candidate in _candidates)
+        {
+            Console.WriteLine($"ID                 : {candidate.Id}");
+            Console.WriteLine($"FullName           : {candidate.FullName}");
+            Console.WriteLine($"Email              : {candidate.Email}");
+            Console.WriteLine($"Phone              : {candidate.Phone}");
+            Console.WriteLine($"YearsOfExperience  : {candidate.YearsOfExperience}");
+            Console.WriteLine(new string('-', 40));
+        }
+    }
+}\n===== ./Services/ApplicationService.cs =====
+using JobApplicationTracker.Models;
+
+namespace JobApplicationTracker.Services;
+
+public class ApplicationService
+{
+    private List<Application> _applications = new();
+
+    public ApplicationService()
+    {
+        _AddApplications();
+    }
+
+    private void _AddApplications()
+    {
+        _applications.Add(new Application(1, 1, 1));
+        _applications.Add(new Application(2, 2, 2));
+        _applications.Add(new Application(3, 3, 3));
+        _applications.Add(new Application(4, 4, 4));
+        _applications.Add(new Application(5, 5, 5));
+    }
+    public void PrintApplications()
+    {
+        foreach (var application in _applications)
+        {
+            Console.WriteLine($"ID          : {application.Id}");
+            Console.WriteLine($"JobId       : {application.JobId}");
+            Console.WriteLine($"CandidateId : {application.CandidateId}");
+            Console.WriteLine($"AppliedDate : {application.AppliedDate}");
+            Console.WriteLine($"Status      : {application.Status}");
+            Console.WriteLine(new string('-', 40));
+        }
+    }
+
+}\n===== ./Services/RecruiterService.cs =====
+using JobApplicationTracker.Models;
+
+namespace JobApplicationTracker.Services;
+
+public class RecruiterService
+{
+    private readonly List<Recruiter> _recruiters = new();
+
+    public RecruiterService()
+    {
+        _AddRecruiters();
+    }
+
+    private void _AddRecruiters()
+    {
+        _recruiters.Add(new Recruiter(1, "John Smith", "john@microsoft.com", 1));
+        _recruiters.Add(new Recruiter(2, "Sarah Johnson", "sarah@google.com", 2));
+        _recruiters.Add(new Recruiter(3, "Michael Brown", "michael@amazon.com", 3));
+    }
+
+    public void PrintRecruiters()
+    {
+        foreach (var recruiter in _recruiters)
+        {
+            Console.WriteLine($"ID        : {recruiter.Id}");
+            Console.WriteLine($"Name      : {recruiter.Name}");
+            Console.WriteLine($"Email     : {recruiter.Email}");
+            Console.WriteLine($"CompanyId : {recruiter.CompanyId}");
+            Console.WriteLine(new string('-', 40));
+        }
+    }
+}\n===== ./Enums/ApplicationStatus.cs =====
+namespace JobApplicationTracker.Enums;
+
+public enum ApplicationStatus
+{
+    Submitted,
+    UnderReview,
+    Interview,
+    Accepted,
+    Rejected
+}\n===== ./Enums/CompanyStatus.cs =====
+namespace JobApplicationTracker.Enums;
+
+public enum CompanyStatus
+{
+    Pending,
+    Approved,
+    Rejected
+}
