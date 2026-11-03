@@ -1,4 +1,4 @@
-
+using JobApplicationTracker.Data;
 using JobApplicationTracker.Enums;
 using JobApplicationTracker.Models;
 
@@ -6,25 +6,26 @@ namespace JobApplicationTracker.Services;
 
 public class CandidateService
 {
-    private List<Candidate> _candidates = new();
+    private readonly DataContext _context;
 
-    public CandidateService()
+    public CandidateService(DataContext context)
     {
+        _context = context;
         _AddCandidates();
     }
 
     private void _AddCandidates()
     {
-        _candidates.Add(new Candidate(1, "Ahmed Hassan", "ahmed@gmail.com", "01012345678", 2));
-        _candidates.Add(new Candidate(2, "Omar Ali", "omar@gmail.com", "01023456789", 3));
-        _candidates.Add(new Candidate(3, "Mohamed Adel", "mohamed@gmail.com", "01034567890", 1));
-        _candidates.Add(new Candidate(4, "Sara Mohamed", "sara@gmail.com", "01045678901", 4));
-        _candidates.Add(new Candidate(5, "Youssef Khaled", "youssef@gmail.com", "01056789012", 0));
+        _context.Candidates.Add(new Candidate("Ahmed Hassan", "ahmed@gmail.com", "01012345678", 2));
+        _context.Candidates.Add(new Candidate("Omar Ali", "omar@gmail.com", "01023456789", 3));
+        _context.Candidates.Add(new Candidate("Mohamed Adel", "mohamed@gmail.com", "01034567890", 1));
+        _context.Candidates.Add(new Candidate("Sara Mohamed", "sara@gmail.com", "01045678901", 4));
+        _context.Candidates.Add(new Candidate("Youssef Khaled", "youssef@gmail.com", "01056789012", 0));
     }
 
     private void _Print()
     {
-        if (_candidates.Count == 0)
+        if (_context.Candidates.GetAll().Count() == 0)
         {
             Console.WriteLine("No candidates found.");
             return;
@@ -34,7 +35,7 @@ public class CandidateService
         Console.WriteLine($"{"ID",-5} {"Full Name",-22} {"Email",-30} {"Phone",-15} {"Experience",-10}");
         Console.WriteLine("--------------------------------------------------------------------------------");
 
-        foreach (var candidate in _candidates)
+        foreach (var candidate in _context.Candidates.GetAll())
         {
             Console.WriteLine(
                 $"{candidate.Id,-5} {candidate.FullName,-22} {candidate.Email,-30} {candidate.Phone,-15} {candidate.YearsOfExperience,-10}");
@@ -45,13 +46,7 @@ public class CandidateService
     {
         try
         {
-            int nextId = _candidates.Count == 0 ? 1 : _candidates[^1].Id + 1;
-
-            var newCandidate = new Candidate(
-                nextId, fullName, email, phone, yearsOfExperience
-            );
-
-            _candidates.Add(newCandidate);
+            _context.Candidates.Add(new Candidate(fullName, email, phone, yearsOfExperience));
 
             Console.WriteLine("\nCandidate Added Successfully");
         }
@@ -65,21 +60,12 @@ public class CandidateService
     {
         try
         {
-            foreach (var candidate in _candidates)
-            {
-                if (candidate.Id == id)
-                {
-                    candidate.ChangeName(fullName);
-                    candidate.ChangeEmail(email);
-                    candidate.ChangePhone(phone);
-                    candidate.ChangeYearsOfExperience(yearsOfExperience);
+            bool isUpdated = _context.Candidates.Update(id, new Candidate(fullName, email, phone, yearsOfExperience));
 
-                    Console.WriteLine($"\nCandidate ID {id} Updated Successfully");
-                    return;
-                }
-            }
-
-            Console.WriteLine("Candidate does not exist");
+            if (isUpdated)
+                Console.WriteLine("Candidate updated successfully.");
+            else
+                Console.WriteLine($"Candidate with ID {id} does not exist.");
         }
         catch (Exception ex)
         {
@@ -91,17 +77,12 @@ public class CandidateService
     {
         try
         {
-            int index = _candidates.FindIndex(x => x.Id == id);
+            bool isRemoved = _context.Candidates.Remove(id);
 
-            if (index == -1)
-            {
-                Console.WriteLine("Candidate does not exist");
-                return;
-            }
-
-            _candidates.RemoveAt(index);
-
-            Console.WriteLine($"\nCandidate ID {id} Removed Successfully");
+            if (isRemoved)
+                Console.WriteLine($"Candidate with ID {id} removed successfully.");
+            else
+                Console.WriteLine($"Candidate with ID {id} does not exist.");
         }
         catch (Exception ex)
         {

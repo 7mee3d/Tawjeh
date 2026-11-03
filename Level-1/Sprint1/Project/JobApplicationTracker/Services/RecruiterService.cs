@@ -1,4 +1,4 @@
-
+using JobApplicationTracker.Data;
 using JobApplicationTracker.Enums;
 using JobApplicationTracker.Models;
 
@@ -6,23 +6,24 @@ namespace JobApplicationTracker.Services;
 
 public class RecruiterService
 {
-    private readonly List<Recruiter> _recruiters = new();
+    private readonly DataContext _context;
 
-    public RecruiterService()
+    public RecruiterService(DataContext context)
     {
+        _context = context;
         _AddRecruiters();
     }
 
     private void _AddRecruiters()
     {
-        _recruiters.Add(new Recruiter(1, "John Smith", "john@microsoft.com", 1));
-        _recruiters.Add(new Recruiter(2, "Sarah Johnson", "sarah@google.com", 2));
-        _recruiters.Add(new Recruiter(3, "Michael Brown", "michael@amazon.com", 3));
+        _context.Recruiters.Add(new Recruiter("John Smith", "john@microsoft.com", 1));
+        _context.Recruiters.Add(new Recruiter("Sarah Johnson", "sarah@google.com", 2));
+        _context.Recruiters.Add(new Recruiter("Michael Brown", "michael@amazon.com", 3));
     }
 
     private void _Print()
     {
-        if (_recruiters.Count == 0)
+        if (_context.Recruiters.GetAll().Count() == 0)
         {
             Console.WriteLine("No recruiters found.");
             return;
@@ -32,7 +33,7 @@ public class RecruiterService
         Console.WriteLine($"{"ID",-5} {"Name",-20} {"Email",-30} {"Company ID",-10}");
         Console.WriteLine("---------------------------------------------------------------------");
 
-        foreach (var recruiter in _recruiters)
+        foreach (var recruiter in _context.Recruiters.GetAll())
         {
             Console.WriteLine(
                 $"{recruiter.Id,-5} {recruiter.Name,-20} {recruiter.Email,-30} {recruiter.CompanyId,-10}");
@@ -43,14 +44,7 @@ public class RecruiterService
     {
         try
         {
-            int nextId = _recruiters.Count == 0
-                ? 1
-                : _recruiters[^1].Id + 1;
-
-            var newRecruiter = new Recruiter(nextId, name, email, companyId);
-
-            _recruiters.Add(newRecruiter);
-
+            _context.Recruiters.Add(new Recruiter(name, email, companyId));
             Console.WriteLine("\nRecruiter Added Successfully");
         }
         catch (Exception ex)
@@ -63,20 +57,12 @@ public class RecruiterService
     {
         try
         {
-            foreach (var recruiter in _recruiters)
-            {
-                if (recruiter.Id == id)
-                {
-                    recruiter.ChangeName(name);
-                    recruiter.ChangeEmail(email);
-                    recruiter.ChangeCompany(companyId);
+            bool isUpdated = _context.Recruiters.Update(id, new Recruiter(name, email, companyId));
 
-                    Console.WriteLine($"\nRecruiter ID {id} Updated Successfully");
-                    return;
-                }
-            }
-
-            Console.WriteLine("Recruiter does not exist");
+            if (isUpdated)
+                Console.WriteLine("Recruiter updated successfully.");
+            else
+                Console.WriteLine($"Recruiter with ID {id} does not exist.");
         }
         catch (Exception ex)
         {
@@ -88,17 +74,12 @@ public class RecruiterService
     {
         try
         {
-            int index = _recruiters.FindIndex(x => x.Id == id);
+            bool isRemoved = _context.Recruiters.Remove(id);
 
-            if (index == -1)
-            {
-                Console.WriteLine("Recruiter does not exist");
-                return;
-            }
-
-            _recruiters.RemoveAt(index);
-
-            Console.WriteLine($"\nRecruiter ID {id} Removed Successfully");
+            if (isRemoved)
+                Console.WriteLine($"Recruiter with ID {id} removed successfully.");
+            else
+                Console.WriteLine($"Recruiter with ID {id} does not exist.");
         }
         catch (Exception ex)
         {

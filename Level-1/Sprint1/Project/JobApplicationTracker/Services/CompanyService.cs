@@ -1,3 +1,4 @@
+using JobApplicationTracker.Data;
 using JobApplicationTracker.Enums;
 using JobApplicationTracker.Models;
 
@@ -5,25 +6,26 @@ namespace JobApplicationTracker.Services;
 
 public class CompanyService
 {
-    private readonly List<Company> _companies = new();
+    private readonly DataContext _context;
 
-    public CompanyService()
+    public CompanyService(DataContext context)
     {
+        _context = context;
         _AddCompanies();
     }
 
     private void _AddCompanies()
     {
-        _companies.Add(new Company(1, "Microsoft", "Software Development", "Redmond"));
+        _context.Companies.Add(new Company("Microsoft", "Software Development", "Redmond"));
 
-        _companies.Add(new Company(2, "Google", "Technology", "Mountain View"));
+        _context.Companies.Add(new Company("Google", "Technology", "Mountain View"));
 
-        _companies.Add(new Company(3, "Amazon", "E-Commerce", "Seattle"));
+        _context.Companies.Add(new Company("Amazon", "E-Commerce", "Seattle"));
     }
 
     private void _Print()
     {
-        if (_companies.Count == 0)
+        if (_context.Companies.GetAll().Count() == 0)
         {
             Console.WriteLine("No companies found.");
             return;
@@ -33,28 +35,19 @@ public class CompanyService
         Console.WriteLine($"{"ID",-5} {"Name",-20} {"Industry",-25} {"City",-15} {"Status",-10}");
         Console.WriteLine("--------------------------------------------------------------------------");
 
-        foreach (var company in _companies)
+        foreach (var company in _context.Companies.GetAll())
         {
             Console.WriteLine(
                 $"{company.Id,-5} {company.Name,-20} {company.Industry,-25} {company.City,-15} {company.Status,-10}");
         }
     }
-    
+
     private void _Add(string name, string industry, string city)
     {
         try
         {
-
-            int lastId = _companies.Count == 0 ? 0 : _companies[^1].Id;
-
-            int nextId = lastId + 1;
-
-            var newComp = new Company(nextId, name, industry, city);
-
-            _companies.Add(newComp);
+            _context.Companies.Add(new Company(name, industry, city));
             System.Console.WriteLine($"\n\nCompany Added Successfully");
-
-
         }
         catch (Exception ex)
         {
@@ -66,30 +59,16 @@ public class CompanyService
     {
         try
         {
+            bool isUpdated = _context.Companies.Update(id, new Company(name, industry, city, status));
 
-            foreach (var comp in _companies)
-            {
-                if (comp.Id == id)
-                {
-
-                    comp.ChangeStatusCompany(status);
-                    comp.SetName(name);
-                    comp.SetCity(city);
-                    comp.SetIndustry(industry);
-
-                    System.Console.WriteLine($"\n\nCompany id {id} Updated Successfully");
-
-                    return;
-
-                }
-            }
-
-            System.Console.WriteLine("Company does not exists");
-
+            if (isUpdated)
+                Console.WriteLine("Company updated successfully.");
+            else
+                Console.WriteLine($"Company with ID {id} does not exist.");
         }
         catch (Exception ex)
         {
-            System.Console.WriteLine(ex.Message);
+            Console.WriteLine(ex.Message);
         }
     }
 
@@ -97,21 +76,16 @@ public class CompanyService
     {
         try
         {
+            bool isRemoved = _context.Companies.Remove(id);
 
-            int index = _companies.FindIndex(x => x.Id == id);
-            if (index == -1)
-            {
-                System.Console.WriteLine("Company does not exists");
-                return;
-            }
-
-            _companies.RemoveAt(index);
-            System.Console.WriteLine($"\n\nCompany id {id} Removed Successfully");
-
+            if (isRemoved)
+                Console.WriteLine($"Company with ID {id} removed successfully.");
+            else
+                Console.WriteLine($"Company with ID {id} does not exist.");
         }
         catch (Exception ex)
         {
-            System.Console.WriteLine(ex.Message);
+            Console.WriteLine(ex.Message);
         }
     }
 
@@ -197,7 +171,6 @@ public class CompanyService
                             System.Console.WriteLine("Invalid company id , try again : ");
 
                         _Remove(id);
-
                         break;
                     }
 
@@ -205,12 +178,10 @@ public class CompanyService
                     {
                         return;
                     }
-
             }
 
             System.Console.WriteLine("Enter any key to back main menu ");
             Console.ReadKey();
-
         }
     }
 }

@@ -2,13 +2,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace JobApplicationTracker.Models;
 
-public class Job
+public class Job : BaseEntity
 {
-    public Job(int id, string title, string description, decimal salary, string location, int companyId, int recruiterId)
+    public Job(string title, string description, decimal salary, string location, int companyId, int recruiterId)
     {
-        if (id <= 0)
-            throw new ArgumentOutOfRangeException(nameof(id), id, "Job ID must be greater than zero.");
-
         ChangeDescription(description);
         ChangeLocation(location);
         ChangeTitle(title);
@@ -16,13 +13,11 @@ public class Job
         ChangeCompany(companyId);
         ChangeSalary(salary);
 
-        Id = id;
         Salary = salary;
         PostedDate = DateTime.Now;
 
     }
 
-    public int Id { get; private set; }
     [Required]
     public string Title { get; private set; } = string.Empty;
     public string Description { get; private set; } = string.Empty;

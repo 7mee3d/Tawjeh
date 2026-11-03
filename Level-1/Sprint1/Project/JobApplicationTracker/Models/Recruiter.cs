@@ -2,25 +2,18 @@ using System.Net.Mail;
 
 namespace JobApplicationTracker.Models;
 
-public class Recruiter
+public class Recruiter : BaseEntity
 {
-    public Recruiter(int id, string name, string email, int companyId)
+    public Recruiter(string name, string email, int companyId)
     {
-        if (id <= 0)
-            throw new ArgumentOutOfRangeException(nameof(id));
-
         if (companyId <= 0)
             throw new ArgumentOutOfRangeException(nameof(companyId));
 
         ChangeName(name);
         ChangeEmail(email);
         ChangeCompany(companyId);
-
-        Id = id;
-
     }
 
-    public int Id { get; private set; }
     public string Name { get; private set; } = string.Empty;
     public string Email { get; private set; } = string.Empty;
     public int CompanyId { get; private set; }

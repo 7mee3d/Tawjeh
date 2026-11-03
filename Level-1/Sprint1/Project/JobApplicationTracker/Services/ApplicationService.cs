@@ -1,4 +1,4 @@
-
+using JobApplicationTracker.Data;
 using JobApplicationTracker.Enums;
 using JobApplicationTracker.Models;
 
@@ -6,25 +6,26 @@ namespace JobApplicationTracker.Services;
 
 public class ApplicationService
 {
-    private List<Application> _applications = new();
+    private readonly DataContext _context;
 
-    public ApplicationService()
+    public ApplicationService(DataContext context)
     {
+        _context = context;
         _AddApplications();
     }
 
     private void _AddApplications()
     {
-        _applications.Add(new Application(1, 1, 1));
-        _applications.Add(new Application(2, 2, 2));
-        _applications.Add(new Application(3, 3, 3));
-        _applications.Add(new Application(4, 4, 4));
-        _applications.Add(new Application(5, 5, 5));
+        _context.Applications.Add(new Application(1, 1));
+        _context.Applications.Add(new Application(2, 2));
+        _context.Applications.Add(new Application(3, 3));
+        _context.Applications.Add(new Application(4, 4));
+        _context.Applications.Add(new Application(5, 5));
     }
 
     private void _Print()
     {
-        if (_applications.Count == 0)
+        if (_context.Applications.GetAll().Count() == 0)
         {
             Console.WriteLine("No applications found.");
             return;
@@ -34,7 +35,7 @@ public class ApplicationService
         Console.WriteLine($"{"ID",-5} {"Job ID",-10} {"Candidate ID",-15} {"Applied Date",-15} {"Status",-15}");
         Console.WriteLine("----------------------------------------------------------------");
 
-        foreach (var application in _applications)
+        foreach (var application in _context.Applications.GetAll())
         {
             Console.WriteLine(
                 $"{application.Id,-5} {application.JobId,-10} {application.CandidateId,-15} {application.AppliedDate,-15:yyyy-MM-dd} {application.Status,-15}");
@@ -45,13 +46,7 @@ public class ApplicationService
     {
         try
         {
-
-
-            int nextId = _applications.Count == 0 ? 1 : _applications[^1].Id + 1;
-
-            var newApplication = new Application(nextId, jobId, candidateId);
-
-            _applications.Add(newApplication);
+            _context.Applications.Add(new Application(jobId, candidateId));
 
             Console.WriteLine("\nApplication Added Successfully");
         }
@@ -65,20 +60,12 @@ public class ApplicationService
     {
         try
         {
-            foreach (var application in _applications)
-            {
-                if (application.Id == id)
-                {
-                    application.ChangeStatus(status);
-                    application.ChangeJobId(jobId);
-                    application.ChangeCandidateId(candidateId);
+            bool isUpdated = _context.Applications.Update(id, new Application(jobId, candidateId, status));
 
-                    Console.WriteLine($"\nApplication id {id} Updated Successfully");
-                    return;
-                }
-            }
-
-            Console.WriteLine("Application does not exist");
+            if (isUpdated)
+                Console.WriteLine("Application updated successfully.");
+            else
+                Console.WriteLine($"Application with ID {id} does not exist.");
         }
         catch (Exception ex)
         {
@@ -90,17 +77,12 @@ public class ApplicationService
     {
         try
         {
-            int index = _applications.FindIndex(x => x.Id == id);
+            bool isRemoved = _context.Applications.Remove(id);
 
-            if (index == -1)
-            {
-                Console.WriteLine("Application does not exist");
-                return;
-            }
-
-            _applications.RemoveAt(index);
-
-            Console.WriteLine($"\nApplication ID {id} Removed Successfully");
+            if (isRemoved)
+                Console.WriteLine($"Application with ID {id} removed successfully.");
+            else
+                Console.WriteLine($"Application with ID {id} does not exist.");
         }
         catch (Exception ex)
         {

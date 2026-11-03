@@ -3,20 +3,16 @@ using JobApplicationTracker.Enums;
 
 namespace JobApplicationTracker.Models;
 
-public class Company
+public class Company : BaseEntity 
 {
-    public Company(int id, string name, string industry, string city)
+    public Company(string name, string industry, string city , CompanyStatus status = CompanyStatus.Pending)
     {
-        if (id <= 0)
-            throw new ArgumentOutOfRangeException(nameof(id));
-
-        this.Id = id ; 
+        ChangeStatusCompany(status);
         SetName(name);
         SetIndustry(industry);
         SetCity(city);
     }
     
-    public int Id { get; private set; }
     [Required]
     public string Name { get; private set; } = string.Empty;
     public string Industry { get; private set; } = string.Empty;

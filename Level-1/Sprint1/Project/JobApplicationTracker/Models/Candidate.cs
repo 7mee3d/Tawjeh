@@ -1,11 +1,9 @@
 namespace JobApplicationTracker.Models;
 
-public class Candidate
+public class Candidate : BaseEntity 
 {
-    public Candidate(int id, string fullName, string email, string phone, int yearsOfExperience)
+    public Candidate( string fullName, string email, string phone, int yearsOfExperience)
     {
-        if (id <= 0)
-            throw new ArgumentOutOfRangeException(nameof(id));
 
         if (string.IsNullOrWhiteSpace(fullName))
             throw new ArgumentException("Full name is required.", nameof(fullName));
@@ -21,12 +19,8 @@ public class Candidate
         ChangeEmail(email);
         ChangePhone(phone);
         ChangeYearsOfExperience(yearsOfExperience);
-        
-        Id = id;
-
     }
 
-    public int Id { get; private set; }
     public string FullName { get; private set; } = string.Empty;
     public string Email { get; private set; } = string.Empty;
     public string Phone { get; private set; } = string.Empty;

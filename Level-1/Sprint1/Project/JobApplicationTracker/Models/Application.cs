@@ -2,20 +2,17 @@ using JobApplicationTracker.Enums;
 
 namespace JobApplicationTracker.Models;
 
-public class Application
+public class Application : BaseEntity
 {
-    public Application(int id, int jobId, int candidateId)
+    public Application(int jobId, int candidateId, ApplicationStatus status = ApplicationStatus.Submitted)
     {
-        if (id <= 0)
-            throw new ArgumentOutOfRangeException(nameof(id));
-
+        ChangeStatus(status);
         ChangeJobId(jobId);
         ChangeCandidateId(candidateId);
-        Id = id;
+
         AppliedDate = DateTime.Now;
 
     }
-    public int Id { get; private set; }
     public int JobId { get; private set; }
     public int CandidateId { get; private set; }
     public DateTime AppliedDate { get; private set; }

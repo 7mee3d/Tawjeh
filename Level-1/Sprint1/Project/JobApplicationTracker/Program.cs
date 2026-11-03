@@ -1,6 +1,7 @@
 ﻿
 using JobApplicationTracker.Services;
 using JobApplicationTracker.Enums;
+using JobApplicationTracker.Data;
 
 void PrintMainMenu()
 {
@@ -18,13 +19,13 @@ void PrintMainMenu()
     Console.Write("  Select an option: ");
 }
 
+DataContext context = new();
 
-CompanyService companyService = new();
-RecruiterService recruiterService = new();
-JobService jobService = new();
-CandidateService candidateService = new();
-ApplicationService applicationService = new();
-
+CompanyService companyService = new(context);
+RecruiterService recruiterService = new(context);
+JobService jobService = new(context);
+CandidateService candidateService = new(context);
+ApplicationService applicationService = new(context);
 
 while (true)
 {

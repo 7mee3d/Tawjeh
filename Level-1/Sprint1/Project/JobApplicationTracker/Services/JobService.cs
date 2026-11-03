@@ -1,30 +1,32 @@
-namespace JobApplicationTracker.Services;
-
+using JobApplicationTracker.Data;
 using JobApplicationTracker.Enums;
 using JobApplicationTracker.Models;
 
+namespace JobApplicationTracker.Services;
+
 public class JobService
 {
-    private List<Job> _jobs = new();
+    private readonly DataContext _context;
 
-    public JobService()
+    public JobService(DataContext context)
     {
+        _context = context;
         _AddJobs();
     }
 
     private void _AddJobs()
     {
-        _jobs.Add(new Job(1, "Backend Developer", ".NET and ASP.NET Core development", 2500, "Redmond", 1, 1));
-        _jobs.Add(new Job(2, "Software Engineer", "Build scalable software systems", 3000, "Redmond", 1, 1));
-        _jobs.Add(new Job(3, "Frontend Developer", "React and modern JavaScript development", 2200, "Mountain View", 2, 2));
-        _jobs.Add(new Job(4, "Data Engineer", "Design and maintain data pipelines", 3500, "Mountain View", 2, 2));
-        _jobs.Add(new Job(5, "Cloud Engineer", "AWS infrastructure and cloud solutions", 3200, "Seattle", 3, 3));
-        _jobs.Add(new Job(6, "DevOps Engineer", "CI/CD and infrastructure automation", 3000, "Seattle", 3, 3));
+        _context.Jobs.Add(new Job("Backend Developer", ".NET and ASP.NET Core development", 2500, "Redmond", 1, 1));
+        _context.Jobs.Add(new Job("Software Engineer", "Build scalable software systems", 3000, "Redmond", 1, 1));
+        _context.Jobs.Add(new Job("Frontend Developer", "React and modern JavaScript development", 2200, "Mountain View", 2, 2));
+        _context.Jobs.Add(new Job("Data Engineer", "Design and maintain data pipelines", 3500, "Mountain View", 2, 2));
+        _context.Jobs.Add(new Job("Cloud Engineer", "AWS infrastructure and cloud solutions", 3200, "Seattle", 3, 3));
+        _context.Jobs.Add(new Job("DevOps Engineer", "CI/CD and infrastructure automation", 3000, "Seattle", 3, 3));
     }
 
     private void _Print()
     {
-        if (_jobs.Count == 0)
+        if (_context.Jobs.GetAll().Count() == 0)
         {
             Console.WriteLine("No jobs found.");
             return;
@@ -34,7 +36,7 @@ public class JobService
         Console.WriteLine($"{"ID",-5} {"Title",-20} {"Salary",-12} {"Location",-15} {"Is Open",-10} {"Company ID",-12} {"Recruiter ID",-12}");
         Console.WriteLine("----------------------------------------------------------------------------------------------");
 
-        foreach (var job in _jobs)
+        foreach (var job in _context.Jobs.GetAll())
         {
             Console.WriteLine(
                 $"{job.Id,-5} {job.Title,-20} {job.Salary,-12:F2} {job.Location,-15} {job.IsOpen,-10} {job.CompanyId,-12} {job.RecruiterId,-12}");
@@ -45,14 +47,8 @@ public class JobService
     {
         try
         {
-            int nextId = _jobs.Count == 0 ? 1 : _jobs[^1].Id + 1;
-
-            var newJob = new Job(nextId, title, description, salary, location, companyId, recuiterId);
-
-            _jobs.Add(newJob);
+            _context.Jobs.Add(new Job(title, description, salary, location, companyId, recuiterId));
             System.Console.WriteLine($"\n\nJob Added Successfully");
-
-
         }
         catch (Exception ex)
         {
@@ -60,35 +56,20 @@ public class JobService
         }
     }
 
-    private void _Update(int id, string title, string description, decimal salary, string location, int companyId, int recuiterId)
+    private void _Update(int id, string title, string description, decimal salary, string location, int companyId, int recruiterId)
     {
         try
         {
+            bool isUpdated = _context.Jobs.Update(id, new Job(title, description, salary, location, companyId, recruiterId));
 
-            foreach (var job in _jobs)
-            {
-                if (job.Id == id)
-                {
-                    job.ChangeTitle(title);
-                    job.ChangeDescription(description);
-                    job.ChangeLocation(location);
-                    job.ChangeRecruiter(recuiterId);
-                    job.ChangeCompany(companyId);
-                    job.ChangeSalary(salary);
-
-                    System.Console.WriteLine($"\n\nJob id {id} Updated Successfully");
-
-                    return;
-
-                }
-            }
-
-            System.Console.WriteLine("Company does not exists");
-
+            if (isUpdated)
+                Console.WriteLine("Job updated successfully.");
+            else
+                Console.WriteLine($"Job with ID {id} does not exist.");
         }
         catch (Exception ex)
         {
-            System.Console.WriteLine(ex.Message);
+            Console.WriteLine(ex.Message);
         }
     }
 
@@ -96,21 +77,16 @@ public class JobService
     {
         try
         {
+            bool isRemoved = _context.Jobs.Remove(id);
 
-            int index = _jobs.FindIndex(x => x.Id == id);
-            if (index == -1)
-            {
-                System.Console.WriteLine("Job does not exists");
-                return;
-            }
-
-            _jobs.RemoveAt(index);
-            System.Console.WriteLine($"\n\nJob id {id} Removed Successfully");
-
+            if (isRemoved)
+                Console.WriteLine($"Job with ID {id} removed successfully.");
+            else
+                Console.WriteLine($"Job with ID {id} does not exist.");
         }
         catch (Exception ex)
         {
-            System.Console.WriteLine(ex.Message);
+            Console.WriteLine(ex.Message);
         }
     }
 
