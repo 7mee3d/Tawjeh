@@ -22,26 +22,30 @@ public class CandidateService
         _candidates.Add(new Candidate(5, "Youssef Khaled", "youssef@gmail.com", "01056789012", 0));
     }
 
-    public void PrintCandidates()
+    private void _Print()
     {
+        if (_candidates.Count == 0)
+        {
+            Console.WriteLine("No candidates found.");
+            return;
+        }
+
+        Console.WriteLine();
+        Console.WriteLine($"{"ID",-5} {"Full Name",-22} {"Email",-30} {"Phone",-15} {"Experience",-10}");
+        Console.WriteLine("--------------------------------------------------------------------------------");
+
         foreach (var candidate in _candidates)
         {
-            Console.WriteLine($"ID                 : {candidate.Id}");
-            Console.WriteLine($"FullName           : {candidate.FullName}");
-            Console.WriteLine($"Email              : {candidate.Email}");
-            Console.WriteLine($"Phone              : {candidate.Phone}");
-            Console.WriteLine($"YearsOfExperience  : {candidate.YearsOfExperience}");
-            Console.WriteLine(new string('-', 40));
+            Console.WriteLine(
+                $"{candidate.Id,-5} {candidate.FullName,-22} {candidate.Email,-30} {candidate.Phone,-15} {candidate.YearsOfExperience,-10}");
         }
     }
 
-    private void _AddCandidate(string fullName, string email, string phone, int yearsOfExperience)
+    private void _Add(string fullName, string email, string phone, int yearsOfExperience)
     {
         try
         {
-            int nextId = _candidates.Count == 0
-                ? 1
-                : _candidates[^1].Id + 1;
+            int nextId = _candidates.Count == 0 ? 1 : _candidates[^1].Id + 1;
 
             var newCandidate = new Candidate(
                 nextId, fullName, email, phone, yearsOfExperience
@@ -57,7 +61,7 @@ public class CandidateService
         }
     }
 
-    private void _UpdateCandidate(int id, string fullName, string email, string phone, int yearsOfExperience)
+    private void _Update(int id, string fullName, string email, string phone, int yearsOfExperience)
     {
         try
         {
@@ -137,7 +141,7 @@ public class CandidateService
                         while (!int.TryParse(Console.ReadLine(), out yearsOfExperience))
                             Console.Write("Invalid value, try again: ");
 
-                        _AddCandidate(fullName, email, phone, yearsOfExperience);
+                        _Add(fullName, email, phone, yearsOfExperience);
                         break;
                     }
 
@@ -164,13 +168,13 @@ public class CandidateService
                         while (!int.TryParse(Console.ReadLine(), out yearsOfExperience))
                             Console.Write("Invalid value, try again: ");
 
-                        _UpdateCandidate(id, fullName, email, phone, yearsOfExperience);
+                        _Update(id, fullName, email, phone, yearsOfExperience);
                         break;
                     }
 
                 case MainOperation.List:
                     {
-                        PrintCandidates();
+                        _Print();
                         break;
                     }
 

@@ -8,22 +8,18 @@ public class Job
     {
         if (id <= 0)
             throw new ArgumentOutOfRangeException(nameof(id), id, "Job ID must be greater than zero.");
-        if (companyId <= 0)
-            throw new ArgumentOutOfRangeException(nameof(companyId), companyId, "Company ID must be greater than zero.");
-        if (recruiterId <= 0)
-            throw new ArgumentOutOfRangeException(nameof(recruiterId), recruiterId, "Recruiter ID must be greater than zero.");
-        if (salary <= 0)
-            throw new ArgumentOutOfRangeException(nameof(salary), salary, "Salary must be greater than zero.");
 
         ChangeDescription(description);
         ChangeLocation(location);
         ChangeTitle(title);
+        ChangeRecruiter(recruiterId);
+        ChangeCompany(companyId);
+        ChangeSalary(salary);
 
         Id = id;
         Salary = salary;
         PostedDate = DateTime.Now;
-        CompanyId = companyId;
-        RecruiterId = recruiterId;
+
     }
 
     public int Id { get; private set; }
@@ -80,12 +76,24 @@ public class Job
     }
     public void ChangeCompany(int companyId)
     {
-        CompanyId = companyId;
+        if (companyId <= 0)
+            throw new ArgumentOutOfRangeException(nameof(companyId));
+
+        this.CompanyId = companyId;
     }
 
     public void ChangeRecruiter(int recruiterId)
     {
-        RecruiterId = recruiterId;
-    }
+        if (recruiterId <= 0)
+            throw new ArgumentOutOfRangeException(nameof(recruiterId));
 
+        this.RecruiterId = recruiterId;
+    }
+    public void ChangeSalary(decimal salary)
+    {
+        if (salary <= 0)
+            throw new ArgumentOutOfRangeException(nameof(salary));
+
+        this.Salary = salary;
+    }
 }

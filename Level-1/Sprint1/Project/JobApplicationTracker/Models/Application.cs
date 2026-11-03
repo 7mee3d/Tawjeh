@@ -9,23 +9,33 @@ public class Application
         if (id <= 0)
             throw new ArgumentOutOfRangeException(nameof(id));
 
-        if (jobId <= 0)
-            throw new ArgumentOutOfRangeException(nameof(jobId));
-
-        if (candidateId <= 0)
-            throw new ArgumentOutOfRangeException(nameof(candidateId));
-
+        ChangeJobId(jobId);
+        ChangeCandidateId(candidateId);
         Id = id;
-        JobId = jobId;
-        CandidateId = candidateId;
         AppliedDate = DateTime.Now;
-    }
 
+    }
     public int Id { get; private set; }
     public int JobId { get; private set; }
     public int CandidateId { get; private set; }
     public DateTime AppliedDate { get; private set; }
     public ApplicationStatus Status { get; private set; } = ApplicationStatus.Submitted;
+
+    public void ChangeJobId(int jobId)
+    {
+        if (jobId <= 0)
+            throw new ArgumentOutOfRangeException(nameof(jobId));
+
+        this.JobId = jobId;
+    }
+
+    public void ChangeCandidateId(int candidateId)
+    {
+        if (candidateId <= 0)
+            throw new ArgumentOutOfRangeException(nameof(candidateId));
+
+        this.CandidateId = candidateId;
+    }
 
     public void ChangeStatus(ApplicationStatus status)
     {

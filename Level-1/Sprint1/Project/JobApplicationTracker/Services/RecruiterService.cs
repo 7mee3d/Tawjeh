@@ -20,19 +20,26 @@ public class RecruiterService
         _recruiters.Add(new Recruiter(3, "Michael Brown", "michael@amazon.com", 3));
     }
 
-    public void PrintRecruiters()
+    private void _Print()
     {
+        if (_recruiters.Count == 0)
+        {
+            Console.WriteLine("No recruiters found.");
+            return;
+        }
+
+        Console.WriteLine();
+        Console.WriteLine($"{"ID",-5} {"Name",-20} {"Email",-30} {"Company ID",-10}");
+        Console.WriteLine("---------------------------------------------------------------------");
+
         foreach (var recruiter in _recruiters)
         {
-            Console.WriteLine($"ID        : {recruiter.Id}");
-            Console.WriteLine($"Name      : {recruiter.Name}");
-            Console.WriteLine($"Email     : {recruiter.Email}");
-            Console.WriteLine($"CompanyId : {recruiter.CompanyId}");
-            Console.WriteLine(new string('-', 40));
+            Console.WriteLine(
+                $"{recruiter.Id,-5} {recruiter.Name,-20} {recruiter.Email,-30} {recruiter.CompanyId,-10}");
         }
     }
 
-    private void _AddRecruiter(string name, string email, int companyId)
+    private void _Add(string name, string email, int companyId)
     {
         try
         {
@@ -52,7 +59,7 @@ public class RecruiterService
         }
     }
 
-    private void _UpdateRecruiter(int id, string name, string email, int companyId)
+    private void _Update(int id, string name, string email, int companyId)
     {
         try
         {
@@ -115,64 +122,64 @@ public class RecruiterService
             switch ((MainOperation)choice)
             {
                 case MainOperation.Add:
-                {
-                    Console.Write("Enter recruiter name: ");
-                    string name = Console.ReadLine()!;
+                    {
+                        Console.Write("Enter recruiter name: ");
+                        string name = Console.ReadLine()!;
 
-                    Console.Write("Enter recruiter email: ");
-                    string email = Console.ReadLine()!;
+                        Console.Write("Enter recruiter email: ");
+                        string email = Console.ReadLine()!;
 
-                    Console.Write("Enter company ID: ");
-                    int companyId;
+                        Console.Write("Enter company ID: ");
+                        int companyId;
 
-                    while (!int.TryParse(Console.ReadLine(), out companyId))
-                        Console.Write("Invalid company ID, try again: ");
+                        while (!int.TryParse(Console.ReadLine(), out companyId))
+                            Console.Write("Invalid company ID, try again: ");
 
-                    _AddRecruiter(name, email, companyId);
-                    break;
-                }
+                        _Add(name, email, companyId);
+                        break;
+                    }
 
                 case MainOperation.Update:
-                {
-                    Console.Write("Enter recruiter ID: ");
-                    int id;
+                    {
+                        Console.Write("Enter recruiter ID: ");
+                        int id;
 
-                    while (!int.TryParse(Console.ReadLine(), out id))
-                        Console.Write("Invalid recruiter ID, try again: ");
+                        while (!int.TryParse(Console.ReadLine(), out id))
+                            Console.Write("Invalid recruiter ID, try again: ");
 
-                    Console.Write("Enter new recruiter name: ");
-                    string name = Console.ReadLine()!;
+                        Console.Write("Enter new recruiter name: ");
+                        string name = Console.ReadLine()!;
 
-                    Console.Write("Enter new recruiter email: ");
-                    string email = Console.ReadLine()!;
+                        Console.Write("Enter new recruiter email: ");
+                        string email = Console.ReadLine()!;
 
-                    Console.Write("Enter new company ID: ");
-                    int companyId;
+                        Console.Write("Enter new company ID: ");
+                        int companyId;
 
-                    while (!int.TryParse(Console.ReadLine(), out companyId))
-                        Console.Write("Invalid company ID, try again: ");
+                        while (!int.TryParse(Console.ReadLine(), out companyId))
+                            Console.Write("Invalid company ID, try again: ");
 
-                    _UpdateRecruiter(id, name, email, companyId);
-                    break;
-                }
+                        _Update(id, name, email, companyId);
+                        break;
+                    }
 
                 case MainOperation.List:
-                {
-                    PrintRecruiters();
-                    break;
-                }
+                    {
+                        _Print();
+                        break;
+                    }
 
                 case MainOperation.Remove:
-                {
-                    Console.Write("Enter recruiter ID: ");
-                    int id;
+                    {
+                        Console.Write("Enter recruiter ID: ");
+                        int id;
 
-                    while (!int.TryParse(Console.ReadLine(), out id))
-                        Console.Write("Invalid recruiter ID, try again: ");
+                        while (!int.TryParse(Console.ReadLine(), out id))
+                            Console.Write("Invalid recruiter ID, try again: ");
 
-                    _Remove(id);
-                    break;
-                }
+                        _Remove(id);
+                        break;
+                    }
 
                 case MainOperation.Back:
                     return;

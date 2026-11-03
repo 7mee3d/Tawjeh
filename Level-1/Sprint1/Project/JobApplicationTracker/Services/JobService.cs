@@ -2,6 +2,7 @@ namespace JobApplicationTracker.Services;
 
 using JobApplicationTracker.Enums;
 using JobApplicationTracker.Models;
+
 public class JobService
 {
     private List<Job> _jobs = new();
@@ -21,38 +22,30 @@ public class JobService
         _jobs.Add(new Job(6, "DevOps Engineer", "CI/CD and infrastructure automation", 3000, "Seattle", 3, 3));
     }
 
-    public void PrintJobs()
+    private void _Print()
     {
+        if (_jobs.Count == 0)
+        {
+            Console.WriteLine("No jobs found.");
+            return;
+        }
+
+        Console.WriteLine();
+        Console.WriteLine($"{"ID",-5} {"Title",-20} {"Salary",-12} {"Location",-15} {"Is Open",-10} {"Company ID",-12} {"Recruiter ID",-12}");
+        Console.WriteLine("----------------------------------------------------------------------------------------------");
+
         foreach (var job in _jobs)
         {
-            Console.WriteLine($"ID          : {job.Id}");
-            Console.WriteLine($"Title       : {job.Title}");
-            Console.WriteLine($"Description : {job.Description}");
-            Console.WriteLine($"Salary      : {job.Salary}");
-            Console.WriteLine($"Location    : {job.Location}");
-            Console.WriteLine($"IsOpen      : {job.IsOpen}");
-            Console.WriteLine($"PostedDate  : {job.PostedDate}");
-            Console.WriteLine($"CompanyId   : {job.CompanyId}");
-            Console.WriteLine($"RecruiterId : {job.RecruiterId}");
-            Console.WriteLine(new string('-', 40));
+            Console.WriteLine(
+                $"{job.Id,-5} {job.Title,-20} {job.Salary,-12:F2} {job.Location,-15} {job.IsOpen,-10} {job.CompanyId,-12} {job.RecruiterId,-12}");
         }
     }
 
-    private void _AddJob(string title, string description, decimal salary, string location, int companyId, int recuiterId)
+    private void _Add(string title, string description, decimal salary, string location, int companyId, int recuiterId)
     {
         try
         {
-            var job = _jobs[^1];
-
-            int lastId = job.Id;
-
-            if (lastId <= 0)
-            {
-                System.Console.WriteLine("Invalid id ");
-                return;
-            }
-
-            int nextId = lastId + 1;
+            int nextId = _jobs.Count == 0 ? 1 : _jobs[^1].Id + 1;
 
             var newJob = new Job(nextId, title, description, salary, location, companyId, recuiterId);
 
@@ -67,7 +60,7 @@ public class JobService
         }
     }
 
-    private void _UpdateJob(int id, string title, string description, decimal salary, string location, int companyId, int recuiterId)
+    private void _Update(int id, string title, string description, decimal salary, string location, int companyId, int recuiterId)
     {
         try
         {
@@ -81,6 +74,8 @@ public class JobService
                     job.ChangeLocation(location);
                     job.ChangeRecruiter(recuiterId);
                     job.ChangeCompany(companyId);
+                    job.ChangeSalary(salary);
+
                     System.Console.WriteLine($"\n\nJob id {id} Updated Successfully");
 
                     return;
@@ -160,7 +155,7 @@ public class JobService
                         while (!int.TryParse(Console.ReadLine(), out recruiterId))
                             Console.Write("Invalid recruiter ID, try again: ");
 
-                        _AddJob(title, description, salary, location, companyId, recruiterId);
+                        _Add(title, description, salary, location, companyId, recruiterId);
                         break;
                     }
 
@@ -195,13 +190,13 @@ public class JobService
                         while (!int.TryParse(Console.ReadLine(), out recruiterId))
                             Console.Write("Invalid recruiter ID, try again: ");
 
-                        _UpdateJob(id, title, description, salary, location, companyId, recruiterId);
+                        _Update(id, title, description, salary, location, companyId, recruiterId);
                         break;
                     }
 
                 case MainOperation.List:
                     {
-                        PrintJobs();
+                        _Print();
                         break;
                     }
 

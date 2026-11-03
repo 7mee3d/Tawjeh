@@ -21,38 +21,31 @@ public class CompanyService
         _companies.Add(new Company(3, "Amazon", "E-Commerce", "Seattle"));
     }
 
-    private void _PrintCompanies()
+    private void _Print()
     {
-        if (_companies.Count <= 0)
+        if (_companies.Count == 0)
         {
-            System.Console.WriteLine("No Data");
+            Console.WriteLine("No companies found.");
             return;
         }
 
+        Console.WriteLine();
+        Console.WriteLine($"{"ID",-5} {"Name",-20} {"Industry",-25} {"City",-15} {"Status",-10}");
+        Console.WriteLine("--------------------------------------------------------------------------");
+
         foreach (var company in _companies)
         {
-            Console.WriteLine($"ID       : {company.Id}");
-            Console.WriteLine($"Name     : {company.Name}");
-            Console.WriteLine($"Industry : {company.Industry}");
-            Console.WriteLine($"City     : {company.City}");
-            Console.WriteLine($"Status   : {company.Status}");
-            Console.WriteLine(new string('-', 40));
+            Console.WriteLine(
+                $"{company.Id,-5} {company.Name,-20} {company.Industry,-25} {company.City,-15} {company.Status,-10}");
         }
     }
-
-    private void _AddCompany(string name, string industry, string city)
+    
+    private void _Add(string name, string industry, string city)
     {
         try
         {
-            var comp = _companies[^1];
 
-            int lastId = comp.Id;
-
-            if (lastId <= 0)
-            {
-                System.Console.WriteLine("Invalid id ");
-                return;
-            }
+            int lastId = _companies.Count == 0 ? 0 : _companies[^1].Id;
 
             int nextId = lastId + 1;
 
@@ -69,7 +62,7 @@ public class CompanyService
         }
     }
 
-    private void _UpdateCompany(int id, string name, string industry, string city)
+    private void _Update(int id, string name, string industry, string city, CompanyStatus status)
     {
         try
         {
@@ -78,9 +71,12 @@ public class CompanyService
             {
                 if (comp.Id == id)
                 {
+
+                    comp.ChangeStatusCompany(status);
                     comp.SetName(name);
                     comp.SetCity(city);
                     comp.SetIndustry(industry);
+
                     System.Console.WriteLine($"\n\nCompany id {id} Updated Successfully");
 
                     return;
@@ -148,37 +144,48 @@ public class CompanyService
                         System.Console.WriteLine("Enter city company : ");
                         city = Console.ReadLine()!;
 
-                        _AddCompany(name, industry, city);
+                        _Add(name, industry, city);
                         break;
                     }
 
                 case MainOperation.Update:
                     {
                         int id = 0;
-                        System.Console.WriteLine("Enter company id : ");
+                        Console.Write("Enter company id: ");
+
                         while (!int.TryParse(Console.ReadLine(), out id))
-                            System.Console.WriteLine("Invalid company id , try again : ");
+                            Console.Write("Invalid company id, try again: ");
 
-                        System.Console.WriteLine("\n");
-                        string name = string.Empty;
-                        System.Console.WriteLine("Enter name company : ");
-                        name = Console.ReadLine()!;
+                        Console.Write("Enter new company name: ");
+                        string name = Console.ReadLine()!;
 
-                        string industry = string.Empty;
-                        System.Console.WriteLine("Enter industry company : ");
-                        industry = Console.ReadLine()!;
+                        Console.Write("Enter new company industry: ");
+                        string industry = Console.ReadLine()!;
 
-                        string city = string.Empty;
-                        System.Console.WriteLine("Enter city company : ");
-                        city = Console.ReadLine()!;
+                        Console.Write("Enter new company city: ");
+                        string city = Console.ReadLine()!;
 
-                        _UpdateCompany(id, name, industry, city);
+                        Console.WriteLine("\nSelect Company Status:");
+
+                        foreach (CompanyStatus status in Enum.GetValues<CompanyStatus>())
+                            Console.WriteLine($"{(byte)status} - {status}");
+
+                        byte statusValue;
+
+                        while (!byte.TryParse(Console.ReadLine(), out statusValue) || !Enum.IsDefined(typeof(CompanyStatus), statusValue))
+                        {
+                            Console.Write("Invalid status, try again: ");
+                        }
+
+                        CompanyStatus companyStatus = (CompanyStatus)statusValue;
+
+                        _Update(id, name, industry, city, companyStatus);
                         break;
                     }
 
                 case MainOperation.List:
                     {
-                        _PrintCompanies();
+                        _Print();
                         break;
                     }
 
