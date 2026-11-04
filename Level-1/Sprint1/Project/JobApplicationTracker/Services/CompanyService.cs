@@ -17,171 +17,77 @@ public class CompanyService
     private void _AddCompanies()
     {
         _context.Companies.Add(new Company("Microsoft", "Software Development", "Redmond"));
-
         _context.Companies.Add(new Company("Google", "Technology", "Mountain View"));
-
         _context.Companies.Add(new Company("Amazon", "E-Commerce", "Seattle"));
+
     }
 
-    private void _Print()
+    public IEnumerable<Company> List()
     {
-        if (_context.Companies.GetAll().Count() == 0)
-        {
-            Console.WriteLine("No companies found.");
-            return;
-        }
-
-        Console.WriteLine();
-        Console.WriteLine($"{"ID",-5} {"Name",-20} {"Industry",-25} {"City",-15} {"Status",-10}");
-        Console.WriteLine("--------------------------------------------------------------------------");
-
-        foreach (var company in _context.Companies.GetAll())
-        {
-            Console.WriteLine(
-                $"{company.Id,-5} {company.Name,-20} {company.Industry,-25} {company.City,-15} {company.Status,-10}");
-        }
+        return _context.Companies.GetAll();
     }
 
-    private void _Add(string name, string industry, string city)
+    public void Add(string name, string industry, string city)
     {
-        try
-        {
-            _context.Companies.Add(new Company(name, industry, city));
-            System.Console.WriteLine($"\n\nCompany Added Successfully");
-        }
-        catch (Exception ex)
-        {
-            System.Console.WriteLine(ex.Message);
-        }
+        if (
+            string.IsNullOrWhiteSpace(name) ||
+            string.IsNullOrWhiteSpace(industry) ||
+            string.IsNullOrWhiteSpace(city)
+            )
+            throw new ArgumentOutOfRangeException();
+
+        _context.Companies.Add(new Company(name, industry, city));
     }
 
-    private void _Update(int id, string name, string industry, string city, CompanyStatus status)
+    public bool Update(int id, string name, string industry, string city, CompanyStatus status)
     {
-        try
-        {
-            bool isUpdated = _context.Companies.Update(id, new Company(name, industry, city, status));
+        if (id <= 0)
+            return false;
 
-            if (isUpdated)
-                Console.WriteLine("Company updated successfully.");
-            else
-                Console.WriteLine($"Company with ID {id} does not exist.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
+        return _context.Companies.Update(id, new Company(name, industry, city));
     }
 
-    private void _Remove(int id)
+    public bool Remove(int id)
     {
-        try
-        {
-            bool isRemoved = _context.Companies.Remove(id);
+        var comp = GetById(id);
+        if (comp is null)
+            return false;
 
-            if (isRemoved)
-                Console.WriteLine($"Company with ID {id} removed successfully.");
-            else
-                Console.WriteLine($"Company with ID {id} does not exist.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
+        return _context.Companies.Remove(id);
     }
 
-    public void StartupCompanyService()
+    public Company? GetById(int companyId)
     {
-        while (true)
-        {
-            Console.Clear();
-            Utility.Utility.PrintSubMenu("Company");
+        if (companyId <= 0)
+            throw new ArgumentOutOfRangeException(nameof(companyId));
 
-            byte choice = 0;
-            Console.Write("Choose: ");
-            while (!byte.TryParse(Console.ReadLine(), out choice))
-                System.Console.WriteLine("Invlid , enter agian : ");
+        return _context.Companies.GetById(companyId);
+    }
 
-            switch ((MainOperation)choice)
-            {
-                case MainOperation.Add:
-                    {
-                        System.Console.WriteLine("\n");
-                        string name = string.Empty;
-                        System.Console.WriteLine("Enter name company : ");
-                        name = Console.ReadLine()!;
+    public void ChangeCompanyStatus(int companyId, CompanyStatus status)
+    {
+        if (companyId <= 0)
+            throw new ArgumentOutOfRangeException(nameof(companyId));
 
-                        string industry = string.Empty;
-                        System.Console.WriteLine("Enter industry company : ");
-                        industry = Console.ReadLine()!;
+        var comp = _context.Companies.GetById(companyId);
 
-                        string city = string.Empty;
-                        System.Console.WriteLine("Enter city company : ");
-                        city = Console.ReadLine()!;
+        if (comp is null)
+            throw new ArgumentNullException(nameof(comp));
 
-                        _Add(name, industry, city);
-                        break;
-                    }
+        comp.ChangeStatusCompany(status);
+    }
 
-                case MainOperation.Update:
-                    {
-                        int id = 0;
-                        Console.Write("Enter company id: ");
+    public List<Company> ListByStatus(CompanyStatus status)
+    {
+        if (!Enum.IsDefined(status))
+            throw new InvalidOperationException(nameof(status));
 
-                        while (!int.TryParse(Console.ReadLine(), out id))
-                            Console.Write("Invalid company id, try again: ");
+        List<Company> companies = new();
 
-                        Console.Write("Enter new company name: ");
-                        string name = Console.ReadLine()!;
+        foreach (var item in _context.Companies.GetAll())
+            if (item.Status == status)
+                companies.Add(item);
 
-                        Console.Write("Enter new company industry: ");
-                        string industry = Console.ReadLine()!;
-
-                        Console.Write("Enter new company city: ");
-                        string city = Console.ReadLine()!;
-
-                        Console.WriteLine("\nSelect Company Status:");
-
-                        foreach (CompanyStatus status in Enum.GetValues<CompanyStatus>())
-                            Console.WriteLine($"{(byte)status} - {status}");
-
-                        byte statusValue;
-
-                        while (!byte.TryParse(Console.ReadLine(), out statusValue) || !Enum.IsDefined(typeof(CompanyStatus), statusValue))
-                        {
-                            Console.Write("Invalid status, try again: ");
-                        }
-
-                        CompanyStatus companyStatus = (CompanyStatus)statusValue;
-
-                        _Update(id, name, industry, city, companyStatus);
-                        break;
-                    }
-
-                case MainOperation.List:
-                    {
-                        _Print();
-                        break;
-                    }
-
-                case MainOperation.Remove:
-                    {
-                        int id = 0;
-                        System.Console.WriteLine("Enter company id : ");
-                        while (!int.TryParse(Console.ReadLine(), out id))
-                            System.Console.WriteLine("Invalid company id , try again : ");
-
-                        _Remove(id);
-                        break;
-                    }
-
-                case MainOperation.Back:
-                    {
-                        return;
-                    }
-            }
-
-            System.Console.WriteLine("Enter any key to back main menu ");
-            Console.ReadKey();
-        }
+        return companies;
     }
 }

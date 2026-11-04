@@ -6,5 +6,8 @@ public enum MainOperation : byte
     Add , 
     Update ,
     List,
-    Remove 
+    Remove ,
+    Get ,
+    ChangeStatus ,
+    ListByStatus 
 }

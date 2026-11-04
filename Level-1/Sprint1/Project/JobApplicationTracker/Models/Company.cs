@@ -3,16 +3,15 @@ using JobApplicationTracker.Enums;
 
 namespace JobApplicationTracker.Models;
 
-public class Company : BaseEntity 
+public class Company : BaseEntity
 {
-    public Company(string name, string industry, string city , CompanyStatus status = CompanyStatus.Pending)
+    public Company(string name, string industry, string city)
     {
-        ChangeStatusCompany(status);
         SetName(name);
         SetIndustry(industry);
         SetCity(city);
     }
-    
+
     [Required]
     public string Name { get; private set; } = string.Empty;
     public string Industry { get; private set; } = string.Empty;
@@ -37,8 +36,14 @@ public class Company : BaseEntity
 
     public void ChangeStatusCompany(CompanyStatus status)
     {
-        if (!Enum.IsDefined(status))
+        if (!Enum.IsDefined(typeof(CompanyStatus), status))
             throw new InvalidOperationException("Status Company is invalid");
+
+        if (this.Status != CompanyStatus.Pending)
+            throw new InvalidOperationException("Company status cannot be changed.");
+
+        if (status == CompanyStatus.Pending)
+            throw new InvalidOperationException("Choose Approved or Rejected.");
 
         this.Status = status;
     }

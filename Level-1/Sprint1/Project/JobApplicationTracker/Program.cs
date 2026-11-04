@@ -1,7 +1,6 @@
-﻿
-using JobApplicationTracker.Services;
-using JobApplicationTracker.Enums;
+﻿using JobApplicationTracker.Enums;
 using JobApplicationTracker.Data;
+using JobApplicationTracker.Presentation;
 
 void PrintMainMenu()
 {
@@ -21,11 +20,11 @@ void PrintMainMenu()
 
 DataContext context = new();
 
-CompanyService companyService = new(context);
-RecruiterService recruiterService = new(context);
-JobService jobService = new(context);
-CandidateService candidateService = new(context);
-ApplicationService applicationService = new(context);
+CompanyPresentation company = new(context);
+RecruiterPresentation recruiter = new(context);
+JobPresentation job = new(context);
+CandidatePresentation candidate = new(context);
+ApplicationPresentation application = new(context);
 
 while (true)
 {
@@ -42,27 +41,26 @@ while (true)
     switch ((MainMenuOption)choice)
     {
         case MainMenuOption.Companies:
-            companyService.StartupCompanyService();
+            company.Start();
             break;
 
         case MainMenuOption.Recruiters:
-            recruiterService.StartupRecruiterService();
+            recruiter.Start();
             break;
 
         case MainMenuOption.Jobs:
-            jobService.StartupJobService();
+            job.Start();
             break;
 
         case MainMenuOption.Candidates:
-            candidateService.StartupCandidateService();
+            candidate.Start();
             break;
 
         case MainMenuOption.Applications:
-            applicationService.StartupApplicationService();
+            application.Start();
             break;
 
         case MainMenuOption.Exit:
-            Console.WriteLine("\nThank you");
             return;
 
         default:

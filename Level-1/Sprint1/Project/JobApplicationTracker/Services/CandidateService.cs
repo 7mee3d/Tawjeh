@@ -1,5 +1,5 @@
+
 using JobApplicationTracker.Data;
-using JobApplicationTracker.Enums;
 using JobApplicationTracker.Models;
 
 namespace JobApplicationTracker.Services;
@@ -23,160 +23,32 @@ public class CandidateService
         _context.Candidates.Add(new Candidate("Youssef Khaled", "youssef@gmail.com", "01056789012", 0));
     }
 
-    private void _Print()
+    public IEnumerable<Candidate> List()
     {
-        if (_context.Candidates.GetAll().Count() == 0)
-        {
-            Console.WriteLine("No candidates found.");
-            return;
-        }
-
-        Console.WriteLine();
-        Console.WriteLine($"{"ID",-5} {"Full Name",-22} {"Email",-30} {"Phone",-15} {"Experience",-10}");
-        Console.WriteLine("--------------------------------------------------------------------------------");
-
-        foreach (var candidate in _context.Candidates.GetAll())
-        {
-            Console.WriteLine(
-                $"{candidate.Id,-5} {candidate.FullName,-22} {candidate.Email,-30} {candidate.Phone,-15} {candidate.YearsOfExperience,-10}");
-        }
+        return _context.Candidates.GetAll();
     }
 
-    private void _Add(string fullName, string email, string phone, int yearsOfExperience)
+    public void Add(string fullName, string email, string phone, int yearsOfExperience)
     {
-        try
-        {
-            _context.Candidates.Add(new Candidate(fullName, email, phone, yearsOfExperience));
+        if (string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(phone) || yearsOfExperience < 0)
+            throw new ArgumentOutOfRangeException();
 
-            Console.WriteLine("\nCandidate Added Successfully");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
+        _context.Candidates.Add(new Candidate(fullName, email, phone, yearsOfExperience));
     }
 
-    private void _Update(int id, string fullName, string email, string phone, int yearsOfExperience)
+    public bool Update(int id, string fullName, string email, string phone, int yearsOfExperience)
     {
-        try
-        {
-            bool isUpdated = _context.Candidates.Update(id, new Candidate(fullName, email, phone, yearsOfExperience));
+        if (id <= 0)
+            return false;
 
-            if (isUpdated)
-                Console.WriteLine("Candidate updated successfully.");
-            else
-                Console.WriteLine($"Candidate with ID {id} does not exist.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
+        return _context.Candidates.Update(id, new Candidate(fullName, email, phone, yearsOfExperience));
     }
 
-    private void _Remove(int id)
+    public bool Remove(int id)
     {
-        try
-        {
-            bool isRemoved = _context.Candidates.Remove(id);
+        if (id <= 0)
+            return false;
 
-            if (isRemoved)
-                Console.WriteLine($"Candidate with ID {id} removed successfully.");
-            else
-                Console.WriteLine($"Candidate with ID {id} does not exist.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
-    }
-
-    public void StartupCandidateService()
-    {
-        while (true)
-        {
-            Console.Clear();
-            Utility.Utility.PrintSubMenu("Candidate");
-
-            byte choice = 0;
-
-            Console.Write("Choose: ");
-            while (!byte.TryParse(Console.ReadLine(), out choice))
-                Console.Write("Invalid choice, try again: ");
-
-            switch ((MainOperation)choice)
-            {
-                case MainOperation.Add:
-                    {
-                        Console.Write("Enter full name: ");
-                        string fullName = Console.ReadLine()!;
-
-                        Console.Write("Enter email: ");
-                        string email = Console.ReadLine()!;
-
-                        Console.Write("Enter phone: ");
-                        string phone = Console.ReadLine()!;
-
-                        Console.Write("Enter years of experience: ");
-                        int yearsOfExperience;
-
-                        while (!int.TryParse(Console.ReadLine(), out yearsOfExperience))
-                            Console.Write("Invalid value, try again: ");
-
-                        _Add(fullName, email, phone, yearsOfExperience);
-                        break;
-                    }
-
-                case MainOperation.Update:
-                    {
-                        Console.Write("Enter candidate ID: ");
-                        int id;
-
-                        while (!int.TryParse(Console.ReadLine(), out id))
-                            Console.Write("Invalid candidate ID, try again: ");
-
-                        Console.Write("Enter new full name: ");
-                        string fullName = Console.ReadLine()!;
-
-                        Console.Write("Enter new email: ");
-                        string email = Console.ReadLine()!;
-
-                        Console.Write("Enter new phone: ");
-                        string phone = Console.ReadLine()!;
-
-                        Console.Write("Enter new years of experience: ");
-                        int yearsOfExperience;
-
-                        while (!int.TryParse(Console.ReadLine(), out yearsOfExperience))
-                            Console.Write("Invalid value, try again: ");
-
-                        _Update(id, fullName, email, phone, yearsOfExperience);
-                        break;
-                    }
-
-                case MainOperation.List:
-                    {
-                        _Print();
-                        break;
-                    }
-
-                case MainOperation.Remove:
-                    {
-                        Console.Write("Enter candidate ID: ");
-                        int id;
-
-                        while (!int.TryParse(Console.ReadLine(), out id))
-                            Console.Write("Invalid candidate ID, try again: ");
-
-                        _Remove(id);
-                        break;
-                    }
-
-                case MainOperation.Back:
-                    return;
-            }
-
-            Console.WriteLine("\nPress any key to return to the menu...");
-            Console.ReadKey();
-        }
+        return _context.Candidates.Remove(id);
     }
 }
