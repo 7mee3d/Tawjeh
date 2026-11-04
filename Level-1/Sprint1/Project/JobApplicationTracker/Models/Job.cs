@@ -13,7 +13,6 @@ public class Job : BaseEntity
         ChangeCompany(companyId);
         ChangeSalary(salary);
 
-        Salary = salary;
         PostedDate = DateTime.Now;
 
     }
@@ -91,4 +90,5 @@ public class Job : BaseEntity
 
         this.Salary = salary;
     }
+
 }

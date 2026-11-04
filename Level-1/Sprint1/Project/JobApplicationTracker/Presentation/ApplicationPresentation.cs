@@ -79,7 +79,7 @@ public class ApplicationPresentation
     private void _Remove()
     {
         Console.Write("Enter Application ID: ");
-        int id;
+        int id = 0;
 
         while (!int.TryParse(Console.ReadLine(), out id))
             Console.Write("Invalid Application ID, try again: ");
@@ -98,7 +98,7 @@ public class ApplicationPresentation
     {
         IEnumerable<Application> applications = _service.List();
 
-        if (!applications.Any())
+        if (applications.Count() == 0 )
         {
             Console.WriteLine("No applications found.");
             return;

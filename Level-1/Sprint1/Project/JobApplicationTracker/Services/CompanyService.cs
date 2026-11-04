@@ -44,7 +44,7 @@ public class CompanyService
         if (id <= 0)
             return false;
 
-        return _context.Companies.Update(id, new Company(name, industry, city));
+        return _context.Companies.Update(id, new Company(name, industry, city , status));
     }
 
     public bool Remove(int id)

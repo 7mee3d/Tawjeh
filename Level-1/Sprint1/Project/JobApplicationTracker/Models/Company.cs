@@ -5,8 +5,9 @@ namespace JobApplicationTracker.Models;
 
 public class Company : BaseEntity
 {
-    public Company(string name, string industry, string city)
+    public Company(string name, string industry, string city, CompanyStatus status = CompanyStatus.Pending)
     {
+        ChangeStatusCompany(status);
         SetName(name);
         SetIndustry(industry);
         SetCity(city);
@@ -41,9 +42,6 @@ public class Company : BaseEntity
 
         if (this.Status != CompanyStatus.Pending)
             throw new InvalidOperationException("Company status cannot be changed.");
-
-        if (status == CompanyStatus.Pending)
-            throw new InvalidOperationException("Choose Approved or Rejected.");
 
         this.Status = status;
     }

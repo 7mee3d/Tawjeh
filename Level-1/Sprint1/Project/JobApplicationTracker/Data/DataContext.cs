@@ -10,4 +10,5 @@ public class DataContext
     public GenericDataStore<Company> Companies { get; } = new();
     public GenericDataStore<Job> Jobs { get; } = new();
     public GenericDataStore<Recruiter> Recruiters { get; } = new();
+
 }

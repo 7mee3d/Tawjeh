@@ -15,6 +15,17 @@ public class JobPresentation
         _service = new JobService(context);
     }
 
+    private int _ReadId()
+    {
+        Console.Write("Enter job ID: ");
+        int id;
+
+        while (!int.TryParse(Console.ReadLine(), out id))
+            Console.Write("Invalid job ID, try again: ");
+
+        return id;
+    }
+
     private void _Add()
     {
         Console.Write("Enter job title: ");
@@ -50,12 +61,8 @@ public class JobPresentation
 
     private void _Update()
     {
-        Console.Write("Enter job ID: ");
-        int id;
 
-        while (!int.TryParse(Console.ReadLine(), out id))
-            Console.Write("Invalid job ID, try again: ");
-
+        int id = _ReadId();
         Console.Write("Enter new job title: ");
         string title = Console.ReadLine()!;
 
@@ -93,11 +100,7 @@ public class JobPresentation
 
     private void _Remove()
     {
-        Console.Write("Enter job ID: ");
-        int id;
-
-        while (!int.TryParse(Console.ReadLine(), out id))
-            Console.Write("Invalid job ID, try again: ");
+        int id = _ReadId();
 
         bool isRemoved = _service.Remove(id);
 
@@ -107,26 +110,38 @@ public class JobPresentation
             Console.WriteLine($"Job with ID {id} does not exist.");
     }
 
-    private void _Print()
+    private void _Print(IEnumerable<Job> jobs)
     {
-        IEnumerable<Job> jobs = _service.List();
-        bool hasJobs = false;
 
-        foreach (var job in jobs)
+        if (jobs.Count() == 0)
         {
-            if (!hasJobs)
-            {
-                Console.WriteLine();
-                Console.WriteLine($"{"ID",-5} {"Title",-20} {"Salary",-12} {"Location",-15} {"Is Open",-10} {"Company ID",-12} {"Recruiter ID",-12}");
-                Console.WriteLine("----------------------------------------------------------------------------------------------");
-                hasJobs = true;
-            }
-
-            Console.WriteLine($"{job.Id,-5} {job.Title,-20} {job.Salary,-12:F2} {job.Location,-15} {job.IsOpen,-10} {job.CompanyId,-12} {job.RecruiterId,-12}");
+            Console.WriteLine("No jobs found.");
+            return;
         }
 
-        if (!hasJobs)
-            Console.WriteLine("No jobs found.");
+        Console.WriteLine();
+        Console.WriteLine($"{"ID",-5} {"Title",-20} {"Salary",-12} {"Location",-15} {"Is Open",-10} {"Company ID",-12} {"Recruiter ID",-12}");
+        Console.WriteLine("----------------------------------------------------------------------------------------------");
+
+
+        foreach (var job in jobs)
+            Console.WriteLine($"{job.Id,-5} {job.Title,-20} {job.Salary,-12:F2} {job.Location,-15} {job.IsOpen,-10} {job.CompanyId,-12} {job.RecruiterId,-12}");
+
+    }
+
+    private void _Get()
+    {
+        int id = _ReadId();
+
+        Job? job = _service.GetById(id);
+
+        if (job is null)
+        {
+            Console.WriteLine("No job found.");
+            return;
+        }
+
+        _Print([job]);
     }
 
     public void Start()
@@ -155,11 +170,14 @@ public class JobPresentation
                         break;
 
                     case MainOperation.List:
-                        _Print();
+                        _Print(_service.List());
                         break;
 
                     case MainOperation.Remove:
                         _Remove();
+                        break;
+                    case MainOperation.Get:
+                        _Get();
                         break;
 
                     case MainOperation.Back:

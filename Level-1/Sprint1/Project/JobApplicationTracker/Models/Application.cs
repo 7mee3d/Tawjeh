@@ -4,8 +4,9 @@ namespace JobApplicationTracker.Models;
 
 public class Application : BaseEntity
 {
-    public Application(int jobId, int candidateId)
+    public Application(int jobId, int candidateId ,ApplicationStatus status = ApplicationStatus.Submitted )
     {
+        ChangeStatus(status);
         ChangeJobId(jobId);
         ChangeCandidateId(candidateId);
 
@@ -41,9 +42,6 @@ public class Application : BaseEntity
         if (this.Status == ApplicationStatus.Accepted ||
             this.Status == ApplicationStatus.Rejected)
             throw new InvalidOperationException("Application status cannot be changed.");
-
-        if (status == this.Status)
-            throw new InvalidOperationException("Application already has this status.");
 
         this.Status = status;
     }

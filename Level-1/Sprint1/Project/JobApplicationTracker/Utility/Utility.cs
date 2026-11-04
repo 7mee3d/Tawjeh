@@ -26,6 +26,7 @@ public static class Utility
         Console.WriteLine("  2. Update");
         Console.WriteLine("  3. List");
         Console.WriteLine("  4. Remove");
+        Console.WriteLine("  5. Get");
         Console.WriteLine("  0. Back");
         Console.WriteLine($"\n=============================");
     }
