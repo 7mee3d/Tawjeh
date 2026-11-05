@@ -1,0 +1,14 @@
+Ahmed Jehad Ahmed
+
+## Requirement 4 — Check Email Availability
+
+A user can check whether an email address is available for a new candidate. Email comparison is case-insensitive. The result is available only if no existing candidate uses that email.
+
+
+- Actor (User)
+- Inputs - Validations (the email is valid or not (as format))
+- Business rules (Check the email already exists or not (case-insensitive))
+- Output (mesdsage error (the email is already exists or the email not exists))
+- Which collection would you choose , and why? (Hash-set)
+- What is the expected time complexity? (O(1))
+
