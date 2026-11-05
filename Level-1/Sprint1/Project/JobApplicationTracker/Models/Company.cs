@@ -7,7 +7,11 @@ public class Company : BaseEntity
 {
     public Company(string name, string industry, string city, CompanyStatus status = CompanyStatus.Pending)
     {
-        ChangeStatusCompany(status);
+        if (!Enum.IsDefined(typeof(CompanyStatus), status))
+            throw new ArgumentException("Invalid company status.");
+
+        Status = status;
+
         SetName(name);
         SetIndustry(industry);
         SetCity(city);
@@ -38,10 +42,13 @@ public class Company : BaseEntity
     public void ChangeStatusCompany(CompanyStatus status)
     {
         if (!Enum.IsDefined(typeof(CompanyStatus), status))
-            throw new InvalidOperationException("Status Company is invalid");
+            throw new ArgumentException("Invalid company status.");
 
-        if (this.Status != CompanyStatus.Pending)
-            throw new InvalidOperationException("Company status cannot be changed.");
+        if (Status == CompanyStatus.Rejected)
+            throw new InvalidOperationException("A rejected company cannot change its status.");
+
+        if (Status == status)
+            throw new InvalidOperationException("Company already has this status.");
 
         this.Status = status;
     }
@@ -52,5 +59,13 @@ public class Company : BaseEntity
             throw new ArgumentException("Industry is not valid");
 
         this.Industry = industry.Trim();
+    }
+
+    public void RestoreStatus(CompanyStatus status)
+    {
+        if (!Enum.IsDefined(typeof(CompanyStatus), status))
+            throw new ArgumentException("Invalid company status.");
+
+        this.Status = status;
     }
 }

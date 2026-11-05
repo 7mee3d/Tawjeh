@@ -86,18 +86,15 @@ public class CandidatePresentation
     private void _Print()
     {
         IEnumerable<Candidate> candidates = _service.List();
+        
         bool hasCandidates = false;
 
+        Console.WriteLine();
+        Console.WriteLine($"{"ID",-5} {"Full Name",-22} {"Email",-30} {"Phone",-15} {"Experience",-10}");
+        Console.WriteLine("--------------------------------------------------------------------------------");
         foreach (var candidate in candidates)
         {
-            if (!hasCandidates)
-            {
-                Console.WriteLine();
-                Console.WriteLine($"{"ID",-5} {"Full Name",-22} {"Email",-30} {"Phone",-15} {"Experience",-10}");
-                Console.WriteLine("--------------------------------------------------------------------------------");
-                hasCandidates = true;
-            }
-
+            hasCandidates = true;
             Console.WriteLine($"{candidate.Id,-5} {candidate.FullName,-22} {candidate.Email,-30} {candidate.Phone,-15} {candidate.YearsOfExperience,-10}");
         }
 

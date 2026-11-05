@@ -9,5 +9,6 @@ public enum MainOperation : byte
     Remove ,
     Get ,
     ChangeStatus ,
-    ListByStatus 
+    ListByStatus ,
+    UndoStatus
 }

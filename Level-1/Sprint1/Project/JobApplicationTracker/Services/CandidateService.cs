@@ -7,6 +7,7 @@ namespace JobApplicationTracker.Services;
 public class CandidateService
 {
     private readonly DataContext _context;
+    private readonly HashSet<string> _uniqueEmails = new(StringComparer.OrdinalIgnoreCase);
 
     public CandidateService(DataContext context)
     {
@@ -21,6 +22,9 @@ public class CandidateService
         _context.Candidates.Add(new Candidate("Mohamed Adel", "mohamed@gmail.com", "01034567890", 1));
         _context.Candidates.Add(new Candidate("Sara Mohamed", "sara@gmail.com", "01045678901", 4));
         _context.Candidates.Add(new Candidate("Youssef Khaled", "youssef@gmail.com", "01056789012", 0));
+
+        foreach (var candidate in _context.Candidates.GetAll())
+            _uniqueEmails.Add(candidate.Email);
     }
 
     public IEnumerable<Candidate> List()
@@ -30,10 +34,21 @@ public class CandidateService
 
     public void Add(string fullName, string email, string phone, int yearsOfExperience)
     {
-        if (string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(phone) || yearsOfExperience < 0)
+        if (string.IsNullOrWhiteSpace(fullName) ||
+            string.IsNullOrWhiteSpace(email) ||
+            string.IsNullOrWhiteSpace(phone) ||
+            yearsOfExperience < 0)
+        {
             throw new ArgumentOutOfRangeException();
+        }
 
-        _context.Candidates.Add(new Candidate(fullName, email, phone, yearsOfExperience));
+        var candidate = new Candidate(fullName, email, phone, yearsOfExperience);
+
+        if (_uniqueEmails.Contains(candidate.Email))
+            throw new InvalidOperationException("This email is already registered.");
+
+        _context.Candidates.Add(candidate);
+        _uniqueEmails.Add(candidate.Email);
     }
 
     public bool Update(int id, string fullName, string email, string phone, int yearsOfExperience)
@@ -41,7 +56,33 @@ public class CandidateService
         if (id <= 0)
             return false;
 
-        return _context.Candidates.Update(id, new Candidate(fullName, email, phone, yearsOfExperience));
+        var existingCandidate = _context.Candidates.GetById(id);
+
+        if (existingCandidate is null)
+            return false;
+
+        if (string.IsNullOrWhiteSpace(fullName) ||
+            string.IsNullOrWhiteSpace(email) ||
+            string.IsNullOrWhiteSpace(phone) ||
+            yearsOfExperience < 0)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+
+        var candidate = new Candidate(fullName, email, phone, yearsOfExperience);
+
+        if (!string.Equals(existingCandidate.Email,candidate.Email, StringComparison.OrdinalIgnoreCase) && _uniqueEmails.Contains(candidate.Email))
+            throw new InvalidOperationException("This email is already registered.");
+            
+        bool isUpdated = _context.Candidates.Update(id, candidate);
+
+        if (!isUpdated)
+            return false;
+
+        _uniqueEmails.Remove(existingCandidate.Email);
+        _uniqueEmails.Add(candidate.Email);
+
+        return true;
     }
 
     public bool Remove(int id)
@@ -49,6 +90,18 @@ public class CandidateService
         if (id <= 0)
             return false;
 
-        return _context.Candidates.Remove(id);
+        var candidate = _context.Candidates.GetById(id);
+
+        if (candidate is null)
+            return false;
+
+        bool isRemoved = _context.Candidates.Remove(id);
+
+        if (!isRemoved)
+            return false;
+
+        _uniqueEmails.Remove(candidate.Email);
+
+        return true;
     }
 }

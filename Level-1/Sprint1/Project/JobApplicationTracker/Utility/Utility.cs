@@ -14,6 +14,7 @@ public static class Utility
         Console.WriteLine("  5. Get");
         Console.WriteLine("  6. Change Status");
         Console.WriteLine("  7. List By Status");
+        Console.WriteLine("  8. Undo Status");
         Console.WriteLine("  0. Back");
         Console.WriteLine($"\n=============================");
     }

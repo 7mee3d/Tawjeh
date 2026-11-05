@@ -10,9 +10,8 @@ public class GenericDataStore<T> : IDataStore<T> where T : class, IEntity
 
     public void Add(T item)
     {
-        if (item is null)
-            ArgumentNullException.ThrowIfNull(item);
-
+        ArgumentNullException.ThrowIfNull(item);
+        
         int nextId = _Id + 1;
         item.AssignId(nextId);
         _items.Add(item);

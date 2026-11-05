@@ -97,19 +97,22 @@ public class ApplicationPresentation
     private void _Print()
     {
         IEnumerable<Application> applications = _service.List();
-
-        if (applications.Count() == 0 )
-        {
-            Console.WriteLine("No applications found.");
-            return;
-        }
-
+        
+        bool hasApplciations = false;
         Console.WriteLine();
         Console.WriteLine($"{"ID",-5} {"Job ID",-10} {"Candidate ID",-15} {"Applied Date",-15} {"Status",-15}");
         Console.WriteLine("----------------------------------------------------------------");
 
         foreach (Application application in applications)
+        {
+            hasApplciations = true;
             Console.WriteLine($"{application.Id,-5} {application.JobId,-10} {application.CandidateId,-15} {application.AppliedDate,-15:yyyy-MM-dd} {application.Status,-15}");
+
+        }
+
+        if (!hasApplciations)
+            Console.WriteLine("No applications found.");
+
     }
 
     public void Start()
@@ -153,7 +156,7 @@ public class ApplicationPresentation
             {
                 Console.WriteLine(ex.Message);
             }
-            
+
             Console.WriteLine("\nPress any key to return to the menu...");
             Console.ReadKey();
         }

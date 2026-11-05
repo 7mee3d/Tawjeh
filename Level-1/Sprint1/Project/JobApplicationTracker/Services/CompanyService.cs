@@ -7,6 +7,7 @@ namespace JobApplicationTracker.Services;
 public class CompanyService
 {
     private readonly DataContext _context;
+    private readonly Stack<(int companyId, CompanyStatus status)> _statusCompanies = new();
 
     public CompanyService(DataContext context)
     {
@@ -16,9 +17,9 @@ public class CompanyService
 
     private void _AddCompanies()
     {
-        _context.Companies.Add(new Company("Microsoft", "Software Development", "Redmond"));
-        _context.Companies.Add(new Company("Google", "Technology", "Mountain View"));
-        _context.Companies.Add(new Company("Amazon", "E-Commerce", "Seattle"));
+        _context.Companies.Add(new Company("Microsoft", "Software Development", "Redmond", CompanyStatus.Approved));
+        _context.Companies.Add(new Company("Google", "Technology", "Mountain View", CompanyStatus.Approved));
+        _context.Companies.Add(new Company("Amazon", "E-Commerce", "Seattle", CompanyStatus.Pending));
 
     }
 
@@ -44,7 +45,19 @@ public class CompanyService
         if (id <= 0)
             return false;
 
-        return _context.Companies.Update(id, new Company(name, industry, city , status));
+        var company = GetById(id);
+
+        if (company is null)
+            return false;
+
+        company.SetName(name);
+        company.SetIndustry(industry);
+        company.SetCity(city);
+
+        if (company.Status != status)
+            ChangeCompanyStatus(id, status);
+
+        return true;
     }
 
     public bool Remove(int id)
@@ -67,14 +80,35 @@ public class CompanyService
     public void ChangeCompanyStatus(int companyId, CompanyStatus status)
     {
         if (companyId <= 0)
-            throw new ArgumentOutOfRangeException(nameof(companyId));
+            throw new ArgumentException("Invalid company ID.");
 
-        var comp = _context.Companies.GetById(companyId);
+        Company? company = _context.Companies.GetById(companyId);
 
-        if (comp is null)
-            throw new ArgumentNullException(nameof(comp));
+        if (company is null)
+            throw new InvalidOperationException("Company not found.");
 
-        comp.ChangeStatusCompany(status);
+        CompanyStatus previousStatus = company.Status;
+
+        company.ChangeStatusCompany(status);
+
+        _statusCompanies.Push((companyId, previousStatus));
+    }
+
+    public bool UndoLastStatusChange()
+    {
+        if (!_statusCompanies.TryPeek(out var previous))
+            return false;
+
+        Company? company = GetById(previous.companyId);
+
+        if (company is null)
+            throw new InvalidOperationException("Company not found.");
+
+        company.RestoreStatus(previous.status);
+
+        _statusCompanies.Pop();
+
+        return true;
     }
 
     public List<Company> ListByStatus(CompanyStatus status)
@@ -90,4 +124,6 @@ public class CompanyService
 
         return companies;
     }
+
+
 }

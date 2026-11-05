@@ -82,16 +82,13 @@ public class RecruiterPresentation
         IEnumerable<Recruiter> recruiters = _service.List();
         bool hasRecruiters = false;
 
+        Console.WriteLine();
+        Console.WriteLine($"{"ID",-5} {"Name",-20} {"Email",-30} {"Company ID",-10}");
+        Console.WriteLine("---------------------------------------------------------------------");
+
         foreach (var recruiter in recruiters)
         {
-            if (!hasRecruiters)
-            {
-                Console.WriteLine();
-                Console.WriteLine($"{"ID",-5} {"Name",-20} {"Email",-30} {"Company ID",-10}");
-                Console.WriteLine("---------------------------------------------------------------------");
-                hasRecruiters = true;
-            }
-
+            hasRecruiters = true;
             Console.WriteLine($"{recruiter.Id,-5} {recruiter.Name,-20} {recruiter.Email,-30} {recruiter.CompanyId,-10}");
         }
 

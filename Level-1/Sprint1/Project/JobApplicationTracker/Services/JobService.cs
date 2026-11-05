@@ -1,5 +1,6 @@
 
 using JobApplicationTracker.Data;
+using JobApplicationTracker.Enums;
 using JobApplicationTracker.Models;
 
 namespace JobApplicationTracker.Services;
@@ -59,6 +60,8 @@ public class JobService
         if (recruiter is null)
             throw new ArgumentNullException(nameof(recruiter));
 
+        _ValidateCompany(company);
+
         var job = new Job(title, description, salary, location, companyId, recruiterId);
 
         _context.Jobs.Add(job);
@@ -70,6 +73,12 @@ public class JobService
         if (id <= 0)
             return false;
 
+        if (string.IsNullOrWhiteSpace(title) ||string.IsNullOrWhiteSpace(description) || salary <= 0 ||
+            string.IsNullOrWhiteSpace(location) ||
+            companyId <= 0 ||
+            recruiterId <= 0)
+
+            throw new ArgumentOutOfRangeException();
         var company = _context.Companies.GetById(companyId);
 
         if (company is null)
@@ -79,7 +88,7 @@ public class JobService
 
         if (recruiter is null)
             throw new ArgumentNullException(nameof(recruiter));
-            
+        _ValidateCompany(company);
         var job = new Job(title, description, salary, location, companyId, recruiterId);
 
         bool isUpdated = _context.Jobs.Update(id, job);
@@ -108,5 +117,10 @@ public class JobService
 
         return true;
 
+    }
+    private void _ValidateCompany(Company company)
+    {
+        if (company.Status != CompanyStatus.Approved)
+            throw new InvalidOperationException("Only approved companies can publish jobs.");
     }
 }

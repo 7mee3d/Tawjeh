@@ -95,17 +95,20 @@ public class CompanyPresentation
 
     private void _PrintCompanies(IEnumerable<Company> companies)
     {
-
-        if (companies.Count() == 0)
-            Console.WriteLine("No companies found.");
+        bool hasCompanies = false;
 
         Console.WriteLine();
         Console.WriteLine($"{"ID",-5} {"Name",-20} {"Industry",-25} {"City",-15} {"Status",-10}");
         Console.WriteLine("--------------------------------------------------------------------------");
 
         foreach (Company company in companies)
+        {
+            hasCompanies = true;
             Console.WriteLine($"{company.Id,-5} {company.Name,-20} " + $"{company.Industry,-25} {company.City,-15} {company.Status,-10}");
+        }
 
+        if (!hasCompanies)
+            Console.WriteLine("No companies found.");
 
     }
 
@@ -180,6 +183,15 @@ public class CompanyPresentation
         _PrintCompanies(companiesAfterFilterByStatus);
     }
 
+    private void _UndoStatus()
+    {
+
+        bool isRestored = _service.UndoLastStatusChange();
+
+        Console.WriteLine(isRestored ? "Company status restored successfully." : "Nothing to undo.");
+
+    }
+
     public void Start()
     {
         while (true)
@@ -232,6 +244,11 @@ public class CompanyPresentation
                 case MainOperation.ListByStatus:
                     {
                         _ListByStatus();
+                        break;
+                    }
+                case MainOperation.UndoStatus:
+                    {
+                        _UndoStatus();
                         break;
                     }
                 case MainOperation.Back:

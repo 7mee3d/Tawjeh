@@ -113,20 +113,20 @@ public class JobPresentation
     private void _Print(IEnumerable<Job> jobs)
     {
 
-        if (jobs.Count() == 0)
-        {
-            Console.WriteLine("No jobs found.");
-            return;
-        }
-
+        bool hasJobs = false;
         Console.WriteLine();
         Console.WriteLine($"{"ID",-5} {"Title",-20} {"Salary",-12} {"Location",-15} {"Is Open",-10} {"Company ID",-12} {"Recruiter ID",-12}");
         Console.WriteLine("----------------------------------------------------------------------------------------------");
 
 
         foreach (var job in jobs)
+        {
+            hasJobs = true;
             Console.WriteLine($"{job.Id,-5} {job.Title,-20} {job.Salary,-12:F2} {job.Location,-15} {job.IsOpen,-10} {job.CompanyId,-12} {job.RecruiterId,-12}");
+        }
 
+        if (!hasJobs)
+            Console.WriteLine("No jobs found.");
     }
 
     private void _Get()

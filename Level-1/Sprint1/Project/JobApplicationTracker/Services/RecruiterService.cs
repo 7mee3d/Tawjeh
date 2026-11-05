@@ -44,6 +44,14 @@ public class RecruiterService
         if (id <= 0)
             return false;
 
+        if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) ||companyId <= 0)
+            throw new ArgumentOutOfRangeException();
+
+        var company = _context.Companies.GetById(companyId);
+
+        if (company is null)
+            throw new InvalidOperationException("Company not found.");
+
         return _context.Recruiters.Update(id, new Recruiter(name, email, companyId));
     }
 
